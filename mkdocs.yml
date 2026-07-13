@@ -1,0 +1,27 @@
+site_name: Documentacion de Tramites
+docs_dir: Docs/docs
+site_dir: Docs/site
+
+theme:
+  name: mkdocs
+
+markdown_extensions:
+  - fenced_code
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - javascripts/mermaid.min.js
+  - javascripts/mermaid-init.js
+
+nav:
+  - Inicio: index.md
+  - Tramites:
+      - Emision Hogar Comprensivo: tramites/emision-hogar-comprensivo.md
+      - Emision Voluntario Automoviles: tramites/emision-voluntario-aotomoviles.md
+  - Workflows:
+      - CAD Revision Digitacion y Finiquito: workflows/wf-cad-revision-digitacion-finiquito.md
+  - Catalogos:
+      - Documentos: catalogos/catalogos-documentos.md
