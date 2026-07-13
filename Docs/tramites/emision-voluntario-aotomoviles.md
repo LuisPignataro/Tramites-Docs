@@ -95,7 +95,7 @@ flowchart TD
   E -->|3. Trámites| G[ROL-TRAMITES]
   
   F --> J{¿Revisión aprobada?}
-  J -->|No| C
+  J -->|No| D
   J -->|Sí| H[ROL-DIGITACION]
 
   H --> R[ROL-REVISION]
@@ -118,19 +118,19 @@ flowchart TD
 
 | Orden | Documento | Código | Obligatorio | Responsable de validación | Observaciones |
 |---:|---|---|---|---|---|
-| 1 | Solicitud de automóvil - parte 1 | DOC-SOLICITUD-AUT-P1 | Sí | CAD | Documento base del trámite |
-| 2 | Solicitud de automóvil - parte 2 | DOC-SOLICITUD-AUT-P2 | Sí | CAD | Continuación de la solicitud |
-| 3 | Solicitud de automóvil - parte 3 | DOC-SOLICITUD-AUT-P3 | Sí | CAD | Continuación de la solicitud |
-| 4 | Solicitud de automóvil - parte 4 | DOC-SOLICITUD-AUT-P4 | Sí | CAD | Continuación de la solicitud |
-| 5 | KYC | DOC-KYC | Sí | CAD | Validar existencia |
-| 6 | Guía de inspección | DOC-GUIA-INSPECCION | Sí | CAD / Revisión | Debe coincidir con la placa |
-| 7 | Boleta de cargo automático o PDM | DOC-CARGO-AUTOMATICO-PDM | Condicional | CAD | Aplica según forma de pago |
-| 8 | Cotización | DOC-COTIZACION-AUT | Condicional | CAD / Revisión | Si no viene, puede cargarla revisión |
-| 9 | Fotos | DOC-FOTOS | Condicional | CAD | Según solicitud o comprobante |
-| 10 | Revisión técnica | DOC-REVISION-TECNICA | Condicional | CAD | Puede venir física o indicada en guía |
-| 11 | Deber de información | DOC-DEBER-INFORMACION | Sí | CAD | Validar existencia |
-| 12 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | Revisión / Digitación | Se utiliza para el cierre del trámite |
-| 13 | Comprobante de entrega | DOC-COMPROBANTE-ENTREGA | Sí | CAD | Validar existencia |
+| 1 | Solicitud de automóvil - parte 1 | DOC-SOLICITUD-AUT-P1 | Sí | ROL-CAD | Documento base del trámite |
+| 2 | Solicitud de automóvil - parte 2 | DOC-SOLICITUD-AUT-P2 | Sí | ROL-CAD | Continuación de la solicitud |
+| 3 | Solicitud de automóvil - parte 3 | DOC-SOLICITUD-AUT-P3 | Sí | ROL-CAD | Continuación de la solicitud |
+| 4 | Solicitud de automóvil - parte 4 | DOC-SOLICITUD-AUT-P4 | Sí | ROL-CAD | Continuación de la solicitud |
+| 5 | KYC | DOC-KYC | Sí | ROL-CAD | Validar existencia |
+| 6 | Guía de inspección | DOC-GUIA-INSPECCION | Sí | ROL-CAD / ROL-REVISION | Debe coincidir con la placa |
+| 7 | Boleta de cargo automático o PDM | DOC-CARGO-AUTOMATICO-PDM | Condicional | ROL-CAD | Aplica según forma de pago |
+| 8 | Cotización | DOC-COTIZACION-AUT | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
+| 9 | Fotos | DOC-FOTOS | Condicional | ROL-CAD | Según solicitud o comprobante |
+| 10 | Revisión técnica | DOC-REVISION-TECNICA | Condicional | ROL-CAD | Puede venir física o indicada en guía |
+| 11 | Deber de información | DOC-DEBER-INFORMACION | Sí | ROL-CAD | Validar existencia |
+| 12 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-REVISION / ROL-DIGITACION | Se utiliza para el cierre del trámite |
+| 13 | Comprobante de entrega | DOC-COMPROBANTE-ENTREGA | Sí | ROL-CAD | Validar existencia |
 
 ## 8. Datos del trámite
 
@@ -278,32 +278,34 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Código | Validación | Rol | Resultado si falla |
 |---|---|---|---|
-| VAL-DOC-001 | Debe existir solicitud | CAD | No permite crear trámite |
-| VAL-DOC-002 | Debe existir guía de inspección | CAD | Solicitar documento faltante |
-| VAL-DOC-003 | Debe existir deber de información | CAD | Solicitar documento faltante |
-| VAL-DOC-004 | Debe existir comprobante de entrega | CAD | Solicitar documento faltante |
-| VAL-DOC-005 | Si la forma de pago es cargo automático o PDM, debe existir documento asociado | CAD | Solicitar documento faltante |
+| VAL-DOC-001 | Debe existir solicitud | ROL-CAD | No permite avanzar |
+| VAL-DOC-002 | Debe existir guía de inspección | ROL-CAD | Solicitar documento faltante |
+| VAL-DOC-003 | Debe existir deber de información | ROL-CAD | Solicitar documento faltante |
+| VAL-DOC-004 | Debe existir comprobante de entrega | ROL-CAD | Solicitar documento faltante |
+| VAL-DOC-005 | Si la forma de pago es cargo automático o PDM, debe existir documento asociado | ROL-REVISOR | Solicitar documento faltante |
+| VAL-DOC-006 | Debe existir cotizacion | ROL-REVISOR ROL-TRAMITES | Cargar el documento - ROL-TRAMITES opcional |
 
 ### 9.2 Validaciones de consistencia
 
 | Código | Validación | Datos comparados | Rol | Resultado si falla |
 |---|---|---|---|---|
-| VAL-CONS-001 | La placa debe coincidir entre solicitud, guía de inspección, cotización y revisión técnica | DATA-VEHICULO-PLACA | CAD | Alerta y revisión manual |
-| VAL-CONS-002 | La identificación del propietario debe coincidir con la solicitud cuando corresponda | DATA-PERSONA-ID | CAD / Revisión | Alerta y revisión manual |
-| VAL-CONS-003 | Los datos de póliza emitida deben coincidir con los datos del sistema | Datos de póliza | Revisión final | Devolver a revisión o digitación |
+| VAL-CONS-001 | La placa debe coincidir entre solicitud, guía de inspección, cotización y revisión técnica | DATA-VEHICULO-PLACA | ROL-CAD | Alerta y revisión manual | ROL-CAD | devuelve al agente
+| VAL-CONS-002 | La identificación del propietario debe coincidir con la solicitud cuando corresponda | DATA-PERSONA-ID | ROL-CAD / ROL-REVISION | Alerta y revisión manual |ROL-CAD | devuelve al agente
+| VAL-CONS-003 | Los datos de póliza emitida deben coincidir con los datos del sistema | Datos de póliza | Revisión final | Devolver a revisión o digitación |ROL-CAD | devuelve al agente
 
 ## 10. Reglas de derivación
 
 | Código | Condición | Acción | Rol destino | Prioridad |
 |---|---|---|---|---:|
-| RULE-VIGENCIA-CORTO-PLAZO | Vigencia = Corto Plazo | Generar alerta y enviar a sede / trámites especiales | Trámites | 100 |
-| RULE-VEHICULO-MODIFICADO | Vehículo hecho a medida o modificado = Sí | Generar alerta y enviar a sede / revisión especial | Trámites | 90 |
-| RULE-EXONERADO | Vehículo exonerado de impuestos = Sí | Alertar para digitar con forma de aseguramiento correcta | Digitación | 80 |
-| RULE-EXTRA-PRIMA-REPUESTOS | Paga extra prima en repuestos = Sí | Alertar para digitar con forma de aseguramiento correcta | Digitación | 80 |
-| RULE-SIN-COTIZACION | No existe cotización | Revisor debe cotizar antes de continuar | Revisión | 70 |
-| RULE-ACREEDOR | Cuenta con acreedor = Sí | Alertar para digitar información de acreedor | Digitación | 60 |
-| RULE-BENEFICIARIO | Cuenta con beneficiario = Sí | Alertar para digitar información de beneficiario | Digitación | 60 |
-| RULE-CONDUCTOR-HABITUAL | Cuenta con conductor habitual = Sí | Alertar para digitar información correspondiente | Digitación | 60 |
+| RULE-VALOR-CONVENIDO | Valor convenido = sí | Enviar a sede | ROL-TRAMITES |
+| RULE-VIGENCIA-CORTO-PLAZO | Vigencia = Corto Plazo | Enviar a sede | ROL-TRAMITES |
+| RULE-VEHICULO-MODIFICADO | Vehículo hecho a medida o modificado = Sí | Enviar a sede | ROL-TRAMITES |
+| RULE-EXONERADO | Vehículo exonerado de impuestos = Sí | VALIDACION MANUAL  | ROL-DIGITACION |
+| RULE-EXTRA-PRIMA-REPUESTOS | Paga extra prima en repuestos = Sí | VALIDACION MANUAL | ROL-DIGITACION |
+| RULE-SIN-COTIZACION | No existe cotización | Revisor debe cotizar antes de continuar | ROL-REVISION |
+| RULE-ACREEDOR | Cuenta con acreedor = Sí | VALIDACION MANUAL | ROL-DIGITACION |
+| RULE-BENEFICIARIO | Cuenta con beneficiario = Sí | VALIDACION MANUAL | ROL-DIGITACION |
+| RULE-CONDUCTOR-HABITUAL | Cuenta con conductor habitual = Sí | VALIDACION MANUAL | ROL-DIGITACION |
 
 ## 11. Pasos operativos por rol
 
@@ -314,36 +316,34 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 - Solicitud inicial.
 - Documentos adjuntos.
 - Datos capturados o extraídos automáticamente.
+- Revisiones de consistencia y documentos antes de crear tramite.
 
 #### Tareas
 
-1. Ordenar documentos.
+1. Cargar documentos.
 2. Validar documentos requeridos.
-3. Extraer datos de persona.
-4. Extraer datos del vehículo.
+3. Validar consistencia de datos.
+4. Validar consistencia de documentos.
 5. Validar consistencia de placa.
 6. Consultar o imprimir información del Registro Nacional.
 7. Crear trámite.
-8. Derivar según reglas.
+8. Completar datos faltantes.
 
 #### Salidas posibles
 
 | Resultado | Próximo rol |
 |---|---|
 | Documentación incompleta | Agente / solicitante |
-| Documentación completa y requiere revisión | Revisión |
-| Requiere tratamiento especial | Trámites |
-| Puede digitarse | Digitación |
-| Puede finalizarse | Finiquito |
+| Documentación completa | ROL-REVISION |
+| Requiere tratamiento especial | ROL-TRAMITES |
+
 
 ### 11.2 Revisión
 
 #### Entrada
-
 - Trámite creado por CAD.
 - Documentos validados.
 - Datos extraídos.
-- Alertas de reglas.
 
 #### Tareas
 
@@ -351,17 +351,16 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 2. Validar información técnica.
 3. Validar interés asegurable.
 4. Informar prima deseada.
-5. Completar emisión desde / hasta.
-6. Completar tipo y código de contrato.
 7. Enviar a digitación.
+
 
 #### Salidas posibles
 
 | Resultado | Próximo rol |
 |---|---|
-| Falta documentación | Agente / CAD |
-| Requiere sede o trámite especial | Trámites |
-| Aprobado para digitar | Digitación |
+| Digitacion aprobada | ROL-FINIQUITO |
+| Aprobado para digitar | ROL-DIGITACION |
+| Requiere corrección | ROL-DIGITACION |
 
 ### 11.3 Digitación
 
@@ -369,91 +368,65 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 - Datos ordenados del sistema.
 - Indicaciones del revisor.
-- Alertas aplicables.
 
 #### Tareas
 
 1. Tomar datos desde el sistema.
-2. Cargar datos en sistemas del INS.
+2. Cargar datos en sistemas del INS, copiando y pegando cuando sea posible.
 3. Digitar la póliza.
-4. Registrar resultado.
+4. Ingresar el numero de poliza asignado.
 5. Enviar a revisión final.
 
 #### Salidas posibles
 
 | Resultado | Próximo rol |
 |---|---|
-| Póliza digitada | Revisión |
-| Error detectado | Digitación |
-| Requiere aclaración | Revisión |
+| Póliza digitada | ROL-REVISIÓN |
+| Error detectado | ROL-REVISIÓN |
+
 
 ### 11.4 Revisión final
 
 #### Entrada
-
-- Póliza digitada.
-- Datos del sistema.
-- Condiciones de póliza.
+- Trámite digitado por ROL-DIGITACION.
+- Numero de poliza digitada.
 
 #### Tareas
 
-1. Validar que la digitación sea correcta.
-2. Verificar póliza en sistemas del INS.
-3. Comparar datos emitidos contra datos del sistema.
-4. Registrar condiciones.
-5. Enviar a finiquito si corresponde.
+1. Validar digitación.
+2. Enviar a finiquito si todo es correcto.
+3. Devolver a digitación si hay errores.
+
+(en el futuro, crear nuevo tramite para sede si se requiere revisión especial)
 
 #### Salidas posibles
 
 | Resultado | Próximo rol |
 |---|---|
-| Digitación incorrecta | Digitación |
-| Datos no coinciden | Revisión |
-| Datos correctos | Finiquito |
+| Digitación incorrecta | ROL-DIGITACION |
+| Datos correctos | ROL-FINIQUITO |
 
 ### 11.5 Finiquito
 
 #### Entrada
 
+- Poliza en SIP.
 - Póliza verificada.
 - Datos coincidentes.
-- Condiciones registradas.
 
 #### Tareas
 
-1. Generar finiquito.
+1. Validar prima.
 2. Cerrar trámite.
-3. Dejar trazabilidad del cierre.
-
-## 12. Alertas del sistema
-
-| Código | Mensaje | Condición | Rol visible |
-|---|---|---|---|
-| ALERT-VIGENCIA-CORTO-PLAZO | La vigencia es de corto plazo. Revisar envío a sede. | Vigencia = Corto Plazo | CAD / Revisión |
-| ALERT-VEHICULO-MODIFICADO | Vehículo modificado o hecho a medida. Requiere revisión especial. | Vehículo modificado = Sí | CAD / Revisión |
-| ALERT-EXONERADO | Vehículo exonerado. Validar forma de aseguramiento. | Exonerado = Sí | Digitación |
-| ALERT-EXTRA-PRIMA | Aplica extra prima en repuestos. Validar digitación. | Extra prima = Sí | Digitación |
-| ALERT-ACREEDOR | El trámite posee acreedor. Completar datos correspondientes. | Acreedor = Sí | Digitación |
-| ALERT-BENEFICIARIO | El trámite posee beneficiario. Completar datos correspondientes. | Beneficiario = Sí | Digitación |
+3. Enviar condiciones.
 
 ## 13. Observaciones funcionales
 
-- El sistema debe permitir devolución al agente cuando falten requisitos.
-- El sistema debe permitir devolución a CAD cuando el trámite no pueda realizarse desde digitación.
-- Las devoluciones deberían manejarse con un modelo híbrido:
+- La devolución al agente se realiza vía email. El tramite queda en pendientes del CAD hasta que el agente suba los documentos faltantes.
+- Las devoluciones deberían incluir un mensaje con:
   - motivo tipificado;
   - observación libre;
-  - documentos o datos requeridos.
-- Las reglas deben quedar registradas con código estable.
-- Las alertas deben ser visibles por rol y por etapa.
-- El sistema debería guardar trazabilidad de:
-  - usuario;
-  - rol;
-  - fecha;
-  - acción;
-  - regla aplicada;
-  - destino del trámite.
-
+- Se considera un tramite para cobrar su digitación si:
 
 ## 14. Historial de cambios
 

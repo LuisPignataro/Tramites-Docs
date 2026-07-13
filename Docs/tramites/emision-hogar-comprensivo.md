@@ -93,12 +93,12 @@ flowchart TD
 
 | Orden | Documento | Código | Obligatorio | Responsable de validación | Observaciones |
 |---:|---|---|---|---|---|
-| 1 | Solicitud de hogar - parte 1 | DOC-SOLICITUD-HOGAR-P1 | Sí | CAD | Documento base del trámite |
-| 2 | Solicitud de hogar - parte 2 | DOC-SOLICITUD-HOGAR-P2 | Sí | CAD | Documento base del trámite |
-| 3 | Solicitud de hogar - parte 3 | DOC-SOLICITUD-HOGAR-P3 | Sí | CAD | Documento base del trámite |
-| 4 | Solicitud de hogar - parte 4 | DOC-SOLICITUD-HOGAR-P4 | Sí | CAD | Documento base del trámite |
-| 8 | Cotización | DOC-COTIZACION-HOGAR | Condicional | CAD / Revisión | Si no viene, puede cargarla revisión |
-| 12 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | Revisión / Digitación | Se utiliza para el cierre del trámite |
+| 1 | Solicitud de hogar - parte 1 | DOC-SOLICITUD-HOGAR-P1 | Sí | ROL-CAD | Documento base del trámite |
+| 2 | Solicitud de hogar - parte 2 | DOC-SOLICITUD-HOGAR-P2 | Sí | ROL-CAD | Documento base del trámite |
+| 3 | Solicitud de hogar - parte 3 | DOC-SOLICITUD-HOGAR-P3 | Sí | ROL-CAD | Documento base del trámite |
+| 4 | Solicitud de hogar - parte 4 | DOC-SOLICITUD-HOGAR-P4 | Sí | ROL-CAD | Documento base del trámite |
+| 8 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
+| 12 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-REVISION / ROL-DIGITACION | Se utiliza para el cierre del trámite |
 
 ## 8. Datos del trámite
 
@@ -156,24 +156,23 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 #### Tareas
 
-1. Ordenar documentos.
+1. Cargar documentos.
 2. Validar documentos requeridos.
-3. Extraer datos de persona.
-4. Extraer datos del vehículo.
-5. Validar consistencia de placa.
-6. Consultar o imprimir información del Registro Nacional.
-7. Crear trámite.
-8. Derivar según reglas.
+3. Validar consistencia de datos.
+4. Validar consistencia de documentos.
+5. Crear trámite.
+6. Completar datos faltantes.
+7. Enviar a ROL-TRAMITES
 
 #### Salidas posibles
 
 | Resultado | Próximo rol |
 |---|---|
-| Documentación incompleta | Agente / solicitante |
-| Documentación completa y requiere revisión | Revisión |
-| Requiere tratamiento especial | Trámites |
-| Puede digitarse | Digitación |
-| Puede finalizarse | Finiquito |
+| Documentación incompleta | Agente |
+| Documentación completa | ROL-REVISION |
+| Requiere tratamiento especial | ROL-TRAMITES |
+| Puede digitarse | ROL-DIGITACION |
+| Puede finalizarse | ROL-FINIQUITO |
 
 ### 11.2 Revisión
 
@@ -198,9 +197,9 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Resultado | Próximo rol |
 |---|---|
-| Falta documentación | Agente / CAD |
-| Requiere sede o trámite especial | Trámites |
-| Aprobado para digitar | Digitación |
+| Falta documentación | Agente / ROL-CAD |
+| Requiere sede o trámite especial | ROL-TRAMITES |
+| Aprobado para digitar | ROL-DIGITACION |
 
 ### 11.3 Digitación
 
@@ -222,9 +221,9 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Resultado | Próximo rol |
 |---|---|
-| Póliza digitada | Revisión |
-| Error detectado | Digitación |
-| Requiere aclaración | Revisión |
+| Póliza digitada | ROL-REVISION |
+| Error detectado | ROL-DIGITACION |
+| Requiere aclaración | ROL-REVISION |
 
 ### 11.4 Revisión final
 
@@ -246,9 +245,9 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Resultado | Próximo rol |
 |---|---|
-| Digitación incorrecta | Digitación |
-| Datos no coinciden | Revisión |
-| Datos correctos | Finiquito |
+| Digitación incorrecta | ROL-DIGITACION |
+| Datos no coinciden | ROL-REVISION |
+| Datos correctos | ROL-FINIQUITO |
 
 ### 11.5 Finiquito
 
@@ -268,12 +267,12 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Código | Mensaje | Condición | Rol visible |
 |---|---|---|---|
-| ALERT-VIGENCIA-CORTO-PLAZO | La vigencia es de corto plazo. Revisar envío a sede. | Vigencia = Corto Plazo | CAD / Revisión |
-| ALERT-VEHICULO-MODIFICADO | Vehículo modificado o hecho a medida. Requiere revisión especial. | Vehículo modificado = Sí | CAD / Revisión |
-| ALERT-EXONERADO | Vehículo exonerado. Validar forma de aseguramiento. | Exonerado = Sí | Digitación |
-| ALERT-EXTRA-PRIMA | Aplica extra prima en repuestos. Validar digitación. | Extra prima = Sí | Digitación |
-| ALERT-ACREEDOR | El trámite posee acreedor. Completar datos correspondientes. | Acreedor = Sí | Digitación |
-| ALERT-BENEFICIARIO | El trámite posee beneficiario. Completar datos correspondientes. | Beneficiario = Sí | Digitación |
+| ALERT-VIGENCIA-CORTO-PLAZO | La vigencia es de corto plazo. Revisar envío a sede. | Vigencia = Corto Plazo | ROL-CAD / ROL-REVISION |
+| ALERT-VEHICULO-MODIFICADO | Vehículo modificado o hecho a medida. Requiere revisión especial. | Vehículo modificado = Sí | ROL-CAD / ROL-REVISION |
+| ALERT-EXONERADO | Vehículo exonerado. Validar forma de aseguramiento. | Exonerado = Sí | ROL-DIGITACION |
+| ALERT-EXTRA-PRIMA | Aplica extra prima en repuestos. Validar digitación. | Extra prima = Sí | ROL-DIGITACION |
+| ALERT-ACREEDOR | El trámite posee acreedor. Completar datos correspondientes. | Acreedor = Sí | ROL-DIGITACION |
+| ALERT-BENEFICIARIO | El trámite posee beneficiario. Completar datos correspondientes. | Beneficiario = Sí | ROL-DIGITACION |
 
 ## 13. Observaciones funcionales
 
