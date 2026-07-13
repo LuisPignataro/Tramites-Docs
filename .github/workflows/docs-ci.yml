@@ -2,8 +2,6 @@ name: docs-ci
 
 on:
   push:
-    branches:
-      - "**"
   pull_request:
 
 permissions:
