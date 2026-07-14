@@ -26,7 +26,9 @@ En el futuro los Agentes podrán ingresar solicitudes directamente al sistema, e
 ### Tramites
 
 - [Emision Hogar Comprensivo](tramites/emision-hogar-comprensivo.md)
-- [Emision Voluntario Automoviles](tramites/emision-voluntario-aotomoviles.md)
+- [Emision Hogar Seguro 2000](tramites/emision-hogar-seguro-2000.md)
+- [Emision Incendio comercial](tramites/emision-incendio-comercial.md)
+- [Emision Voluntario Automoviles](tramites/emision-voluntario-automoviles.md)
 
 ### Workflows
 

@@ -1,6 +1,6 @@
 ---
-id: TRAM-HOGAR-COMPRENSIVO-EMISION
-titulo: Emisión de Hogar Comprensivo
+id: TRAM-INCENDIO-COMERCIAL
+titulo: Emisión de Incendio Comercial e industrial
 version: 1.0
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
@@ -10,26 +10,26 @@ roles:
   - ROLE-DIGITACION
   - ROLE-FINIQUITO
 documentos:
-  - DOC-SOLICITUD-INC-HOGARCOMPREN-P1
-  - DOC-SOLICITUD-INC-HOGARCOMPREN-P2
-  - DOC-SOLICITUD-INC-HOGARCOMPREN-P3
-  - DOC-SOLICITUD-INC-HOGARCOMPREN-P4
-  - DOC-SOLICITUD-INC-HOGARCOMPREN-P5
-  - DOC-SOLICITUD-INC-HOGARCOMPREN-P6
-  - DOC-COTIZACION-HOGAR
+  - DOC-SOLICITUD-INC-COMER-P1
+  - DOC-SOLICITUD-INC-COMER-P2
+  - DOC-SOLICITUD-INC-COMER-P3
+  - DOC-SOLICITUD-INC-COMER-P4
+  - DOC-SOLICITUD-INC-COMER-P5
+  - DOC-SOLICITUD-INC-COMER-P6
+  - DOC-COTIZACION-INC-COMER ?
   - DOC-PERFECCIONAMIENTO
   - DOC-DEBER-INFORMACION
 sistemas_relacionados:
   - Pricose
   - INS
-ultima_revision: 2026-07-13
+ultima_revision: 2026-07-14
 ---
 
-# Emisión de Hogar Comprensivo
+# Emisión de Incendio Comercial
 
 ## 1. Resumen
 
-El trámite de **Emisión de Hogar Comprensivo** permite la emisión por ROL-DIGITACION.
+El trámite de **Emisión de Incendio Comercial e Industrial** permite la emisión por ROL-DIGITACION.
 
 El trámite ingresa como una **solicitud** al ROL-CAD **CAD - Centro de Atención Digital**. CAD valida la documentación recibida, extrae datos relevantes y crea el trámite en el sistema.
 
@@ -50,7 +50,7 @@ ROL-REVISION valida la información técnica.
 
 - ➜ **ENVÍA** a ROL-DIGITACION para que se digite la póliza en los sistemas del INS o para realizar correcciones.
 - ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
-  - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
+
 
 ## 4. ROL-DIGITACION, cuarto paso Digitación 
 Digita la póliza en los sistemas del INS, debe ingresar el **número de póliza**.
@@ -103,15 +103,13 @@ flowchart TD
 
 | Orden | Documento | Código | Obligatorio | Responsable de validación | Observaciones |
 |---:|---|---|---|---|---|
-| 1 | Solicitud de hogar - parte 1 | DOC-SOLICITUD-INC-HOGARCOMPREN-P1 | Sí | ROL-CAD | Documento base del trámite |
-| 2 | Solicitud de hogar - parte 2 | DOC-SOLICITUD-INC-HOGARCOMPREN-P2 | Sí | ROL-CAD | Documento base del trámite |
-| 3 | Solicitud de hogar - parte 3 | DOC-SOLICITUD-INC-HOGARCOMPREN-P3 | Sí | ROL-CAD | Documento base del trámite |
-| 4 | Solicitud de hogar - parte 4 | DOC-SOLICITUD-INC-HOGARCOMPREN-P4 | Sí | ROL-CAD | Documento base del trámite |
-| 5 | Solicitud de hogar - parte 5 | DOC-SOLICITUD-INC-HOGARCOMPREN-P5 | Sí | ROL-CAD | Documento base del trámite |
-| 6 | Solicitud de hogar - parte 6 | DOC-SOLICITUD-INC-HOGARCOMPREN-P6 | Sí | ROL-CAD | Documento base del trámite |
-| 7 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 8 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 9 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
+| 1 | Solicitud de hogar - parte 1 | DOC-SOLICITUD-HOGAR-P1 | Sí | ROL-CAD | Documento base del trámite |
+| 2 | Solicitud de hogar - parte 2 | DOC-SOLICITUD-HOGAR-P2 | Sí | ROL-CAD | Documento base del trámite |
+| 3 | Solicitud de hogar - parte 3 | DOC-SOLICITUD-HOGAR-P3 | Sí | ROL-CAD | Documento base del trámite |
+| 4 | Solicitud de hogar - parte 4 | DOC-SOLICITUD-HOGAR-P4 | Sí | ROL-CAD | Documento base del trámite |
+| 5 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 6 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 7 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
 
 ## 8. Datos del trámite
 
@@ -310,5 +308,5 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | No |
-| 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final | No |
+| 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | No |
+
