@@ -1,5 +1,5 @@
 site_name: Documentacion de Tramites
-docs_dir: Docs
+docs_dir: docs
 site_dir: site
 
 theme:
@@ -11,14 +11,18 @@ theme:
   locale: es
 
 markdown_extensions:
-  - fenced_code
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
   - tables
   - toc:
       permalink: true
 
 extra_javascript:
-  - javascripts/mermaid.min.js
+  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
   - javascripts/mermaid-init.js
 
 nav:
