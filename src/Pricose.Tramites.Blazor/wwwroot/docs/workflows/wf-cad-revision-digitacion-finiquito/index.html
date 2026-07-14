@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>CAD Revision Digitacion y Finiquito - Documentacion de Tramites</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "CAD Revision Digitacion y Finiquito";
+        var mkdocs_page_input_path = "workflows\\wf-cad-revision-digitacion-finiquito.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/csharp.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Documentacion de Tramites
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" title="Escriba el término de búsqueda aquí" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Menu de navegación">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Inicio</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tramites</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tramites/emision-hogar-comprensivo/">Emision Hogar Comprensivo</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tramites/emision-hogar-seguro-2000/">Emision Hogar Seguro 2000</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tramites/emision-incendio-comercial/">Emision Incendio Comercial</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tramites/emision-voluntario-aotomoviles/">Emision Voluntario Automoviles</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">CAD Revision Digitacion y Finiquito</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-resumen">1. Resumen</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-diagrama-general">2. Diagrama general</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-estados">3. Estados</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-transiciones">4. Transiciones</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#reglas-globales-del-workflow">*. Reglas globales del workflow</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-motivos-de-devolucion">6. Motivos de devolución</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-evntos-sugeridos-para-el-sistema">7. Ev*ntos sugeridos para el sistema</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-traites-que-usan-este-workflow">8. Trá*ites que usan este workflow</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Catalogos</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../catalogos/catalogos-documentos/">Documentos</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Menú de navegación en móvil">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Documentacion de Tramites</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Documentos"></a></li>
+          <li class="breadcrumb-item">Workflows</li>
+      <li class="breadcrumb-item active">CAD Revision Digitacion y Finiquito</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="workflow-cad-revision-digitacion-finiquito">Workflow CAD → Revisión → Digitación → Finiquito<a class="headerlink" href="#workflow-cad-revision-digitacion-finiquito" title="Permanent link">&para;</a></h1>
+<h2 id="1-resumen">1. Resumen<a class="headerlink" href="#1-resumen" title="Permanent link">&para;</a></h2>
+<p>Este workflow describe el circuito general para trámites que ingresan como solicitud al rol <strong>CAD</strong>, son validados documentalmente, pasan por revisión funcional, digitación operativa y cierre mediante finiquito.</p>
+<h2 id="2-diagrama-general">2. Diagrama general<a class="headerlink" href="#2-diagrama-general" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; SolicitudIngresada
+
+    SolicitudIngresada --&gt; ValidacionCAD
+
+    ValidacionCAD --&gt; DevueltoAgente: Documentación incompleta
+    ValidacionCAD --&gt; TramiteCreado: Documentación completa
+
+    TramiteCreado --&gt; CAD: Continúa en CAD
+    TramiteCreado --&gt; Revision: Requiere revisión
+    TramiteCreado --&gt; Tramites: Requiere trámite especial
+    TramiteCreado --&gt; Digitacion: Listo para digitar
+    TramiteCreado --&gt; Finiquito: Listo para finalizar
+
+    Revision --&gt; DevueltoAgente: Falta requisito
+    Revision --&gt; CAD: Devolver a CAD
+    Revision --&gt; Tramites: Enviar a sede / trámite especial
+    Revision --&gt; Digitacion: Aprobado para digitación
+
+    Digitacion --&gt; RevisionFinal: Póliza digitada
+
+    RevisionFinal --&gt; Digitacion: Corregir digitación
+    RevisionFinal --&gt; Revision: Revisar inconsistencia
+    RevisionFinal --&gt; Finiquito: Datos correctos
+
+    Finiquito --&gt; Finalizado
+    DevueltoAgente --&gt; [*]
+    Finalizado --&gt; [*]</code></pre>
+<h2 id="3-estados">3. Estados<a class="headerlink" href="#3-estados" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Código</th>
+<th>Descripción</th>
+<th>Rol responsable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solicitud ingresada</td>
+<td>ST-SOLICITUD-INGRESADA</td>
+<td>Solicitud recibida pendiente de validación</td>
+<td>CAD</td>
+</tr>
+<tr>
+<td>Validación CAD</td>
+<td>ST-VALIDACION-CAD</td>
+<td>CAD valida documentos y datos iniciales</td>
+<td>CAD</td>
+</tr>
+<tr>
+<td>Trámite creado</td>
+<td>ST-TRAMITE-CREADO</td>
+<td>El trámite ya fue creado en el sistema</td>
+<td>CAD</td>
+</tr>
+<tr>
+<td>Revisión</td>
+<td>ST-REVISION</td>
+<td>Revisor valida requisitos y datos técnicos</td>
+<td>Revisión</td>
+</tr>
+<tr>
+<td>Trámites</td>
+<td>ST-TRAMITES</td>
+<td>Tratamiento especial o derivación a sede</td>
+<td>Trámites</td>
+</tr>
+<tr>
+<td>Digitación</td>
+<td>ST-DIGITACION</td>
+<td>Digitador carga póliza en sistemas correspondientes</td>
+<td>Digitación</td>
+</tr>
+<tr>
+<td>Revisión final</td>
+<td>ST-REVISION-FINAL</td>
+<td>Revisor valida la póliza digitada</td>
+<td>Revisión</td>
+</tr>
+<tr>
+<td>Finiquito</td>
+<td>ST-FINIQUITO</td>
+<td>Se genera cierre del trámite</td>
+<td>Finiquito</td>
+</tr>
+<tr>
+<td>Finalizado</td>
+<td>ST-FINALIZADO</td>
+<td>Trámite cerrado</td>
+<td>Sistema</td>
+</tr>
+<tr>
+<td>Devuelto al agente</td>
+<td>ST-DEVUELTO-AGENTE</td>
+<td>Se devuelve por falta de requisitos o corrección</td>
+<td>CAD / Revisión</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-transiciones">4. Transiciones<a class="headerlink" href="#4-transiciones" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Desde</th>
+<th>Hacia</th>
+<th>Código</th>
+<th>Condición</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solicitud ingresada</td>
+<td>Validación CAD</td>
+<td>TR-INICIAR-CAD</td>
+<td>Solicitud recibida</td>
+<td>Asignar a CAD</td>
+</tr>
+<tr>
+<td>Validación CAD</td>
+<td>Devuelto al agente</td>
+<td>TR-DEVOLVER-AGENTE</td>
+<td>Documentación incompleta</td>
+<td>Registrar motivo</td>
+</tr>
+<tr>
+<td>Validación CAD</td>
+<td>Trámite creado</td>
+<td>TR-CREAR-TRAMITE</td>
+<td>Documentación válida</td>
+<td>Crear trámite</td>
+</tr>
+<tr>
+<td>Trámite creado</td>
+<td>Revisión</td>
+<td>TR-ENVIAR-REVISION</td>
+<td>Requiere revisión</td>
+<td>Asignar revisor</td>
+</tr>
+<tr>
+<td>Trámite creado</td>
+<td>Trámites</td>
+<td>TR-ENVIAR-TRAMITES</td>
+<td>Requiere tratami*nto especial</td>
+<td>Asignar área</td>
+</tr>
+<tr>
+<td>Re*isión</td>
+<td>Digitación</td>
+<td>TR-ENVIAR-DIG*TACION</td>
+<td>Revisión aprobada</td>
+<td>Asign*r digitador</td>
+</tr>
+<tr>
+<td>Digitación</td>
+<td>Revis*ón final</td>
+<td>TR-ENVIAR-REVISION-FINA*</td>
+<td>Póliza digitada</td>
+<td>Asignar revis*r</td>
+</tr>
+<tr>
+<td>Revisión final</td>
+<td>Digitación * TR-CORREGIR-DIGITACION</td>
+<td>Error de*digitación</td>
+<td>Registrar observación*</td>
+<td></td>
+</tr>
+<tr>
+<td>Revisión final</td>
+<td>Finiquito</td>
+<td>T*-ENVIAR-FINIQUITO</td>
+<td>Datos correcto*</td>
+<td>Generar cierre</td>
+</tr>
+<tr>
+<td>Finiquito</td>
+<td>*inalizado</td>
+<td>TR-FINALIZAR</td>
+<td>Finiqui*o generado</td>
+<td>Cerrar trámite</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reglas-globales-del-workflow">*. Reglas globales del workflow<a class="headerlink" href="#reglas-globales-del-workflow" title="Permanent link">&para;</a></h2>
+<p>| <em>ódigo | Regla | Resultado |
+|---|-</em>-|---|
+| WF-RULE-DOC-INCOMPLETA | <em>i falta documentación obligatoria,</em>no se puede avanzar | Devolver al <em>gente |
+| WF-RULE-DATOS-INCONSISTE</em>TES | Si existen datos inconsisten<em>es, requiere revisión manual | Man</em>ener en revisión |
+| WF-RULE-DIGIT<em>CION-INCORRECTA | Si revisión fina</em> detecta error, vuelve a digitació<em> | Devolver a digitación |
+| WF-RU</em>E-DATOS-CORRECTOS | Si póliza emit<em>da coincide con datos del sistema,</em>puede finalizar | Enviar a finiqui*o |</p>
+<h2 id="6-motivos-de-devolucion">6. Motivos de devolución<a class="headerlink" href="#6-motivos-de-devolucion" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Código | Motivo | Usado por |
+|--<em>|---|---|
+| DEV-DOC-FALTANTE | Fal</em>a documentación obligatoria | CAD * Revisión |
+| DEV-DOC-ILEGIBLE | D<em>cumento ilegible | CAD / Revisión *
+| DEV-DATO-INCONSISTENTE | Datos </em>nconsistentes entre documentos | C<em>D / Revisión |
+| DEV-COTIZACION-FA</em>TANTE | Falta cotización | Revisió<em> |
+| DEV-DIGITACION-ERROR | Error </em>n digitación | Revisión final |
+| *EV-REQUIERE-SEDE | Requiere envío * sede | CAD / Revisión |</li>
+</ul>
+<h2 id="7-evntos-sugeridos-para-el-sistema">7. Ev*ntos sugeridos para el sistema<a class="headerlink" href="#7-evntos-sugeridos-para-el-sistema" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>*vento</th>
+<th>Cuándo ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>* SolicitudRecibida</td>
+<td>Cuando ingres* la solicitud</td>
+</tr>
+<tr>
+<td>DocumentacionVal*dada</td>
+<td>Cuando CAD confirma documen*ación completa</td>
+</tr>
+<tr>
+<td>TramiteCreado</td>
+<td>*Cuando se crea el trámite</td>
+</tr>
+<tr>
+<td>Tram*teDerivado</td>
+<td>Cuando cambia de rol *</td>
+</tr>
+<tr>
+<td>TramiteDevuelto</td>
+<td>Cuando vuelve*a un rol anterior o al agente</td>
+</tr>
+<tr>
+<td>*otizacionCompletada</td>
+<td>Cuando revis*ón carga cotización</td>
+</tr>
+<tr>
+<td>PolizaDigi*ada</td>
+<td>Cuando digitación completa c*rga</td>
+</tr>
+<tr>
+<td>PolizaVerificada</td>
+<td>Cuando *evisión final aprueba</td>
+</tr>
+<tr>
+<td>Finiquit*Generado</td>
+<td>Cuando se genera cierre*</td>
+</tr>
+<tr>
+<td>TramiteFinalizado</td>
+<td>Cuando se *ierra definitivamente</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-traites-que-usan-este-workflow">8. Trá*ites que usan este workflow<a class="headerlink" href="#8-traites-que-usan-este-workflow" title="Permanent link">&para;</a></h2>
+<ul>
+<li>../*ramites/emision-automovil.md</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Navegación de pie de página">
+        <a href="../../tramites/emision-voluntario-aotomoviles/" class="btn btn-neutral float-left" title="Emision Voluntario Automoviles"><span class="icon icon-circle-arrow-left"></span> Anterior</a>
+        <a href="../../catalogos/catalogos-documentos/" class="btn btn-neutral float-right" title="Documentos">Siguiente <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Construído con <a href="https://www.mkdocs.org/">MkDocs</a> usando un <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a> provisto por <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versiones">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../tramites/emision-voluntario-aotomoviles/" style="color: #fcfcfc">&laquo; Anterior</a></span>
+    
+    
+      <span><a href="../../catalogos/catalogos-documentos/" style="color: #fcfcfc">Siguiente &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+      <script src="../../javascripts/mermaid-init.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
