@@ -1,3 +1,37 @@
 .wy-nav-content {
   max-width: none;
 }
+
+.mermaid-error {
+  border: 1px solid #b42318;
+  border-radius: 8px;
+  background: #fef3f2;
+  color: #7a271a;
+  padding: 1rem;
+  white-space: normal;
+}
+
+.mermaid-error-title {
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+}
+
+.mermaid-error-message,
+.mermaid-error-source pre {
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background: #fff;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.mermaid-error-source {
+  margin-top: 0.75rem;
+}
+
+.mermaid-error-source summary {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
