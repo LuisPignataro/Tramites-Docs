@@ -16,10 +16,11 @@ documentos:
   - DOC-SOLICITUD-HOGAR-P4
   - DOC-COTIZACION-HOGAR
   - DOC-PERFECCIONAMIENTO
+  - DOC-DEBER-INFORMACION
 sistemas_relacionados:
   - Pricose
   - INS
-ultima_revision: 2026-07-10
+ultima_revision: 2026-07-13
 ---
 
 # Emisión de Hogar Comprensivo
@@ -28,34 +29,43 @@ ultima_revision: 2026-07-10
 
 El trámite de **Emisión de Hogar Comprensivo** permite la emisión por ROL-DIGITACION.
 
-El trámite ingresa como una **solicitud** al rol **CAD - Centro de Atención Digital**. CAD valida la documentación recibida, extrae datos relevantes y crea el trámite en el sistema.
+El trámite ingresa como una **solicitud** al ROL-CAD **CAD - Centro de Atención Digital**. CAD valida la documentación recibida, extrae datos relevantes y crea el trámite en el sistema.
 
 ## 2. ROL-CAD primer paso
-El sistema muestra los documentos faltantes en caso de que no se hayan adjuntados los documentos requeridos. CAD puede devolver la solicitud al agente o solicitante para que complete la documentación.
+El sistema muestra los documentos faltantes en caso de que no se hayan adjuntados los documentos requeridos. CAD puede solicitar que se complete la documentación y mantener la solicitud en espera.
 
-Si los documentos minimos requeridos están presentes se hace una revisón de los datos extraídos y se valida la consistencia de la información. El sistema aplica reglas de derivación para determinar el próximo rol que debe intervenir.
+Si los documentos minimos requeridos están presentes se hace una revisón de los datos extraídos con el **asistente para crear tramites** y se valida la consistencia de la información.
+
+ROL-CAD debe completar los datos faltantes.
 
 - ➜ **ENVÍA** a ROL-REVISION en el resto de los casos.
 
-## 3 Revisión ROL-REVISION
-ROL-REVISION valida la información técnica, completa la cotización si no fue adjuntada.
+## 3 ROL-REVISION, segundo paso Revisión 
 
-- Si no existe DOC-COTIZACION-HOGAR, el revisor debe cotizar y subir el documento. El tramite se ➜ **ENVÍA** al sistema para ser procesado y derivado a ROL-REVISION cuando esté listo.
+- Si no existe DOC-COTIZACION-HOGAR, el revisor debe cotizar y subir el documento. El tramite se ➜ **ENVÍA** al sistema para ser procesado y derivado nuevamente a ROL-REVISION cuando esté listo.
 
-- Si la cotización existe, el revisor valida la información técnica y el interés asegurable.
+ROL-REVISION valida la información técnica.
 
 - ➜ **ENVÍA** a ROL-DIGITACION para que se digite la póliza en los sistemas del INS o para realizar correcciones.
 - ➜ **ENVÍA** a ROL-FINIQUITO si la póliza ya fue digitada.
 - ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 
-## 4. Digitación ROL-DIGITACION
-Digita la póliza en los sistemas del INS, puede ingrear el **número de poliza**.
+## 4. ROL-DIGITACION, cuarto paso Digitación 
+Digita la póliza en los sistemas del INS, debe ingresar el **número de póliza**.
 
 - ➜ **ENVÍA** a ROL-REVISION para validación final.
 - ↩ **DEVUELVE** a ROL-REVISION si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
 
-## 5. ROL-FINIQUITO
+## 5 ROL-REVISION, Revisión final
+
+ROL-REVISION valida la información digitada y la compara con la información del sistema.
+
+- ➜ **ENVÍA** a ROL-FINIQUITO si la póliza ya fue digitada.
+- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
+  - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
+
+## 6. ROL-FINIQUITO
 
 Lee la póliza vía webservice y la carga en SIP.
 
@@ -66,24 +76,23 @@ En caso de no pasar las validaciones, ↩ **DEVUELVE** a ROL-REVISION para que s
 
 ```mermaid
 flowchart TD
-  A[1. CAD recibe la solicitud] --> B{Documentación mínima completa?}
+  A[1. ROL-CAD recibe la solicitud] --> B{Documentación mínima completa?}
   B -->|No| C[Devolver para completar documentos]
-  B -->|Sí| D[CAD valida datos y deriva el trámite]
+  B -->|Sí| D[ROL-CAD Completa datos]
 
   D --> F[ROL-REVISION]
     
   F --> J{¿Revisión aprobada?}
   J -->|No| C
-  J -->|Sí| H[ROL-DIGITACION]
+  J -->|Sí| H[ROL-DIGITACION digita póliza]
 
-  H --> R[ROL-REVISION]
-  R --> S{¿Revisión aprobada?}
-  S -->|No| H
-  S -->|Sí| I[ROL-FINIQUITO]
+  H --> K{¿Digitación correcta?}
+  K -->|No| F
+  K -->|Sí| R[ROL-REVISION revisión final]
   
-  H --> L[Digitar póliza en el INS]
-  L --> M[Enviar a revisión final]
-  M --> F
+  R --> S{¿Revisión aprobada?}
+  S -->|No| F
+  S -->|Sí| I[ROL-FINIQUITO]
 
   I --> N[Validar automáticamente y cargar en SIP]
   N --> O[Trámite finalizado]
@@ -97,8 +106,9 @@ flowchart TD
 | 2 | Solicitud de hogar - parte 2 | DOC-SOLICITUD-HOGAR-P2 | Sí | ROL-CAD | Documento base del trámite |
 | 3 | Solicitud de hogar - parte 3 | DOC-SOLICITUD-HOGAR-P3 | Sí | ROL-CAD | Documento base del trámite |
 | 4 | Solicitud de hogar - parte 4 | DOC-SOLICITUD-HOGAR-P4 | Sí | ROL-CAD | Documento base del trámite |
-| 8 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
-| 12 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-REVISION / ROL-DIGITACION | Se utiliza para el cierre del trámite |
+| 5 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 6 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 7 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
 
 ## 8. Datos del trámite
 
@@ -298,3 +308,4 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Versión | Fecha | Autor | Cambio |
 |---|---|---|---|
 | 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada |
+| 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final |

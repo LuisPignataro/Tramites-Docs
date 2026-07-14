@@ -3,7 +3,12 @@ docs_dir: Docs/docs
 site_dir: Docs/site
 
 theme:
-  name: mkdocs
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - csharp
+  locale: es
 
 markdown_extensions:
   - fenced_code
