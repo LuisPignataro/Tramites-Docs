@@ -46,6 +46,7 @@ Si los documentos minimos requeridos están presentes se hace una revisón de lo
 ### Reglas de derivación posibles:
 - Vigencia.Periodo = Corto Plazo → ROL-TRAMITES
 - Riesgo.Modificado = Sí → ROL-TRAMITES
+- Valor convenido = Sí → ROL-TRAMITES
 - TramiteEnSede = Sí → ROL-TRAMITES
 
 En el resto de los casos, el trámite puede enviarse a ROL-REVISION.
@@ -430,6 +431,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 ## 14. Historial de cambios
 
-| Versión | Fecha | Autor | Cambio |
-|---|---|---|---|
-| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada |
+| Versión | Fecha | Autor | Cambio | En producción |
+|---|---|---|---|---|
+| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | Sí |
+| 1.1 | 2026-07-14 | Equipo funcional | Se agregó regla de derivación para Valor convenido = Sí | No |

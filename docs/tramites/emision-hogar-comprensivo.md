@@ -305,7 +305,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 ## 14. Historial de cambios
 
-| Versión | Fecha | Autor | Cambio |
-|---|---|---|---|
-| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada |
-| 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final |
+| Versión | Fecha | Autor | Cambio | En Producción |
+|---|---|---|---|---|
+| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | No |
+| 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final | No |
