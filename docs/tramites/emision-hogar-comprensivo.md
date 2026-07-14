@@ -76,26 +76,26 @@ En caso de no pasar las validaciones, ↩ **DEVUELVE** a ROL-REVISION para que s
 
 ```mermaid
 flowchart TD
-  A[1. ROL-CAD recibe la solicitud] --> B{Documentación mínima completa?}
-  B -->|No| C[Devolver para completar documentos]
-  B -->|Sí| D[ROL-CAD Completa datos]
+  A["1. ROL-CAD recibe la solicitud"] --> B{"Documentación mínima completa?"}
+  B -->|"No"| C["Devolver para completar documentos"]
+  B -->|"Sí"| D["ROL-CAD completa datos"]
 
-  D --> F[ROL-REVISION]
+  D --> F["ROL-REVISION"]
     
-  F --> J{¿Revisión aprobada?}
-  J -->|No| C
-  J -->|Sí| H[ROL-DIGITACION digita póliza]
+  F --> J{"¿Revisión aprobada?"}
+  J -->|"No"| C
+  J -->|"Sí"| H["ROL-DIGITACION digita póliza"]
 
-  H --> K{¿Digitación correcta?}
-  K -->|No| F
-  K -->|Sí| R[ROL-REVISION revisión final]
+  H --> K{"¿Digitación correcta?"}
+  K -->|"No"| F
+  K -->|"Sí"| R["ROL-REVISION revisión final"]
   
-  R --> S{¿Revisión aprobada?}
-  S -->|No| F
-  S -->|Sí| I[ROL-FINIQUITO]
+  R --> S{"¿Revisión aprobada?"}
+  S -->|"No"| F
+  S -->|"Sí"| I["ROL-FINIQUITO"]
 
-  I --> N[Validar automáticamente y cargar en SIP]
-  N --> O[Trámite finalizado]
+  I --> N["Validar automáticamente y cargar en SIP"]
+  N --> O["Trámite finalizado"]
 ```
 
 ## 7. Documentos requeridos

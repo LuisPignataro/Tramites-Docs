@@ -86,32 +86,32 @@ En caso de no pasar las validaciones, ↩ **DEVUELVE** a ROL-REVISION para que s
 
 ```mermaid
 flowchart TD
-  A[1. CAD recibe la solicitud] --> B{Documentación mínima completa?}
-  B -->|No| C[Devolver para completar documentos]
-  B -->|Sí| D[CAD valida datos y deriva el trámite]
+  A["1. CAD recibe la solicitud"] --> B{"Documentación mínima completa?"}
+  B -->|"No"| C["Devolver para completar documentos"]
+  B -->|"Sí"| D["CAD valida datos y deriva el trámite"]
 
-  D --> E{¿A qué rol deriva?}
-  E -->|2. Revisión| F[ROL-REVISION]
-  E -->|3. Trámites| G[ROL-TRAMITES]
+  D --> E{"¿A qué rol deriva?"}
+  E -->|"2. Revisión"| F["ROL-REVISION"]
+  E -->|"3. Trámites"| G["ROL-TRAMITES"]
   
-  F --> J{¿Revisión aprobada?}
-  J -->|No| D
-  J -->|Sí| H[ROL-DIGITACION]
+  F --> J{"¿Revisión aprobada?"}
+  J -->|"No"| D
+  J -->|"Sí"| H["ROL-DIGITACION"]
 
-  H --> R[ROL-REVISION]
-  R --> S{¿Revisión aprobada?}
-  S -->|No| H
-  S -->|Sí| I[ROL-FINIQUITO]
+  H --> R["ROL-REVISION"]
+  R --> S{"¿Revisión aprobada?"}
+  S -->|"No"| H
+  S -->|"Sí"| I["ROL-FINIQUITO"]
   
-  G --> K[Registrar referencia y completar la gestión]
+  G --> K["Registrar referencia y completar la gestión"]
   K --> I
 
-  H --> L[Digitar póliza en el INS]
-  L --> M[Enviar a revisión final]
+  H --> L["Digitar póliza en el INS"]
+  L --> M["Enviar a revisión final"]
   M --> F
 
-  I --> N[Validar automáticamente y cargar en SIP]
-  N --> O[Trámite finalizado]
+  I --> N["Validar automáticamente y cargar en SIP"]
+  N --> O["Trámite finalizado"]
 ```
 
 ## 7. Documentos requeridos
