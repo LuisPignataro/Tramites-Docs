@@ -1,5 +1,5 @@
 site_name: Documentacion de Tramites
-docs_dir: docs
+docs_dir: Docs
 site_dir: site
 
 theme:
