@@ -3,6 +3,7 @@ setlocal
 cd /d "%~dp0"
 
 set "DEST=..\src\Pricose.Tramites.Blazor\wwwroot\docs"
+set "SRC=..\site"
 
 python -m mkdocs build -f "..\mkdocs.yml"
 if errorlevel 1 (
@@ -12,7 +13,7 @@ if errorlevel 1 (
 
 if not exist "%DEST%" mkdir "%DEST%"
 
-robocopy "site" "%DEST%" /MIR /NFL /NDL /NJH /NJS /NP
+robocopy "%SRC%" "%DEST%" /MIR /NFL /NDL /NJH /NJS /NP
 set "RC=%ERRORLEVEL%"
 if %RC% GEQ 8 (
 	echo [ERROR] Fallo la copia hacia %DEST%.

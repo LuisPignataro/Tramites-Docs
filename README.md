@@ -19,8 +19,8 @@ mkdocs serve
 La documentacion usa:
 
 - Configuracion: `mkdocs.yml`
-- Fuentes: `Docs/docs`
-- Sitio generado: `Docs/site`
+- Fuentes: `docs`
+- Sitio generado: `site`
 
 ## Build local
 

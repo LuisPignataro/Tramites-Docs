@@ -1,6 +1,6 @@
 site_name: Documentacion de Tramites
-docs_dir: Docs/docs
-site_dir: Docs/site
+docs_dir: docs
+site_dir: site
 
 theme:
   name: readthedocs
