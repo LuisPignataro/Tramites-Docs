@@ -421,15 +421,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 2. Cerrar trámite.
 3. Enviar condiciones.
 
-## 13. Observaciones funcionales
-
-- La devolución al agente se realiza vía email. El tramite queda en pendientes del CAD hasta que el agente suba los documentos faltantes.
-- Las devoluciones deberían incluir un mensaje con:
-  - motivo tipificado;
-  - observación libre;
-- Se considera un tramite para cobrar su digitación si:
-
-## 14. Historial de cambios
+## 13. Historial de cambios
 
 | Versión | Fecha | Autor | Cambio | En producción |
 |---|---|---|---|---|
