@@ -61,7 +61,7 @@ ROL-REVISION valida la información técnica.
 - Verifica o ingresa la prima total. **a mejorar** definir que prima se debe ingresar y cual se obtiene del INS.
 
 - ➜ **ENVÍA** a ROL-DIGITACION para que se digite la póliza en los sistemas del INS.
-- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
+- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el CAD haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 
 ## 3.b Sede ROL-TRAMITES
@@ -70,7 +70,8 @@ ROL-TRAMITES actua como un revisor, puede cargar la cotización si no existe, pe
 - Se debe ingresar el valor **Referencia** para hacer seguimiento del tramite.
 - Los tramites en ROL-TRAMITES quedan en **Pendientes** mientras la SEDE realiza su trabajo.
 - ➜ **ENVÍA** a ROL-FINIQUITO una vez emitida la póliza e ingresado el número de póliza.
-
+- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el CAD haga las correcciones necesarias.
+  - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 ## 4. ROL-DIGITACION, cuarto paso Digitación 
 Digita la póliza en los sistemas del INS, debe ingresar el **número de póliza**.
 
@@ -82,6 +83,8 @@ Digita la póliza en los sistemas del INS, debe ingresar el **número de póliza
 ROL-REVISION valida la información digitada y la compara con la información del sistema.
 
 - ➜ **ENVÍA** a ROL-FINIQUITO si la póliza ya fue digitada.
+- ↩ **DEVUELVE** a ROL-DIGITACION si detecta inconsistencias, con comentarios para que el digitador haga las correcciones necesarias.
+  - Los tramites devueltos a ROL-DIGITACION quedan en **Pendientes** mientras el digitador realiza su trabajo.
 - ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 
@@ -101,14 +104,18 @@ Lee la póliza vía webservice y la carga en SIP.
 ```mermaid
 flowchart TD
   A["1. ROL-CAD recibe la solicitud"] --> B{"Documentación mínima completa?"}
-  B -->|"No"| C["Devolver para completar documentos"]
+  B -->|"No"| C["ROL-CAD pendientes: Devolver para completar documentos"]
   B -->|"Sí"| D["ROL-CAD completa datos"]
 
   D --> E{"¿A qué rol deriva?"}
   E -->|"2. Revisión"| F["ROL-REVISION"]
   E -->|"3. Trámites"| G["ROL-TRAMITES"]
 
-  G --> K1["Registrar referencia y completar la gestión"]
+  G --> M{"¿Revisión aprobada?"}
+  M -->|"No"| C
+  M -->|"Sí"| K1
+
+  K1["Registrar referencia y completar la gestión"]
   K1 --> I
 
   F --> J{"¿Revisión aprobada?"}
@@ -120,11 +127,15 @@ flowchart TD
   K -->|"Sí"| R["ROL-REVISION revisión final"]
   
   R --> S{"¿Revisión aprobada?"}
-  S -->|"No"| F
+  S -->|"No"| P{"Devolver a digitación"}
+  P --> |"Si"| H
+  P -->|"No"| D
   S -->|"Sí"| I["ROL-FINIQUITO"]
 
   I --> N["Validar automáticamente y cargar en SIP"]
   N --> O["Trámite finalizado"]
+
+
 ```
 
 ## 7. Documentos requeridos
@@ -328,5 +339,6 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | No |
 | 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final | No |
 | 1.2 | 2026-07-15 | Reunion Kenneth Karen Luis | Documentos, Workflow, se agrega tramites, ajustes en todo el documento | No |
+| 1.3 | 2026-07-17 | Email Kenneth | Cambios en el flujo | No |
 
 Una vez aprobado por Kenneth se copia a Hogar seguro e incendio comercial todo el flujo de emisión y se ajusta a cada producto. 
