@@ -1,7 +1,7 @@
 ---
 id: TRAM-AUTO-EMISION
 titulo: Emisión de Automóvil
-version: 1.0
+version: 1.1
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:

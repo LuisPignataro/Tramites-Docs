@@ -1,7 +1,7 @@
 ---
 id: TRAM-HOGAR-SEGURO-2000
 titulo: Emisión de Hogar Seguro 2000
-version: 1.0
+version: 1.1
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -20,6 +20,7 @@ documentos:
 sistemas_relacionados:
   - Pricose
   - INS
+  - Registro nacional
 ultima_revision: 2026-07-13
 ---
 
@@ -36,19 +37,38 @@ El sistema muestra los documentos faltantes en caso de que no se hayan adjuntado
 
 Si los documentos minimos requeridos están presentes se hace una revisón de los datos extraídos con el **asistente para crear tramites** y se valida la consistencia de la información.
 
+- Obtiene información del registro de bienes inmuebles, descarga la web y adjunta el DOC-REGISTRO-NACIONAL.
+- Verifica el numero de Folio y Propietario.
+- En caso de que la solicitud diga propietario y no lo sea:
+  - Si en observaciones indica que está en proceso de traspaso o que es correcto, se permite continuar. (Proceso manual del ROL-CAD)
+  - ↩ **DEVUELVE** al Agente y queda en **Pendientes** mientras el Agente realiza su trabajo.
+
 ROL-CAD debe completar los datos faltantes.
 
-- ➜ **ENVÍA** a ROL-REVISION en el resto de los casos.
+- Campo Enviar a la sede = si ➜ **ENVÍA** a ROL-TRAMITES.
 
-## 3 ROL-REVISION, segundo paso Revisión 
+- ➜ **ENVÍA** a ROL-REVISION.
+
+## 3.a ROL-REVISION, segundo paso Revisión 
 
 - Si no existe DOC-COTIZACION-HOGAR, el revisor debe cotizar y subir el documento. El tramite se ➜ **ENVÍA** al sistema para ser procesado y derivado nuevamente a ROL-REVISION cuando esté listo.
 
 ROL-REVISION valida la información técnica.
 
-- ➜ **ENVÍA** a ROL-DIGITACION para que se digite la póliza en los sistemas del INS o para realizar correcciones.
-- ➜ **ENVÍA** a ROL-FINIQUITO si la póliza ya fue digitada.
-- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
+- Verifica o ingresa la prima total. **a mejorar** definir que prima se debe ingresar y cual se obtiene del INS.
+
+- ➜ **ENVÍA** a ROL-DIGITACION para que se digite la póliza en los sistemas del INS.
+- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el CAD haga las correcciones necesarias.
+  - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
+
+## 3.b Sede ROL-TRAMITES
+ROL-TRAMITES actua como un revisor, puede cargar la cotización si no existe, pero no es obligatoria.
+
+- Se debe ingresar el valor **Referencia** para hacer seguimiento del tramite.
+- Los tramites en ROL-TRAMITES quedan en **Pendientes** mientras la SEDE realiza su trabajo.
+
+- ➜ **ENVÍA** a ROL-FINIQUITO una vez emitida la póliza e ingresado el número de póliza.
+- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el CAD haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 
 ## 4. ROL-DIGITACION, cuarto paso Digitación 
@@ -62,6 +82,8 @@ Digita la póliza en los sistemas del INS, debe ingresar el **número de póliza
 ROL-REVISION valida la información digitada y la compara con la información del sistema.
 
 - ➜ **ENVÍA** a ROL-FINIQUITO si la póliza ya fue digitada.
+- ↩ **DEVUELVE** a ROL-DIGITACION si detecta inconsistencias, con comentarios para que el digitador haga las correcciones necesarias.
+  - Los tramites devueltos a ROL-DIGITACION quedan en **Pendientes** mientras el digitador realiza su trabajo.
 - ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 
@@ -69,19 +91,38 @@ ROL-REVISION valida la información digitada y la compara con la información de
 
 Lee la póliza vía webservice y la carga en SIP.
 
-Se realizan validaciones automáticas.
-En caso de no pasar las validaciones, ↩ **DEVUELVE** a ROL-REVISION para que se hagan las correcciones necesarias.
+**provisorio**: Validar numero de Folio y Prima total.
+
+↩ **DEVUELVE** a ROL-REVISION si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
+
+- Envia notificacion al asegurado y al agente.
+- Cierra el tramite.
 
 ## 6. Diagrama del flujo 1 a 5 para usuarios
 
 ```mermaid
 flowchart TD
   A["1. ROL-CAD recibe la solicitud"] --> B{"Documentación mínima completa?"}
-  B -->|"No"| C["Devolver para completar documentos"]
+  B -->|"No"| C["ROL-CAD pendientes: 
+   - Devolver al agente
+   - Espera documentacion
+   -Vuelve a quien lo remitio
+  "]
   B -->|"Sí"| D["ROL-CAD completa datos"]
 
-  D --> F["ROL-REVISION"]
-    
+  D --> E{"¿A qué rol deriva?"}
+  E -->|"2. Revisión"| F["ROL-REVISION"]
+  E -->|"3. Trámites"| G["ROL-TRAMITES"]
+
+  G --> M{"¿Revisión aprobada?"}
+  M -->|"No"| C
+  M -->|"Sí"| K1
+
+  K1["Registrar referencia y completar la gestión"]
+  K1 --> K2["Queda en pendiente esperando al INS"]
+  K2 -->|"Finalizado"| I["ROL-FINIQUITO"]
+  K2 -->|"Faltan requisitos"| C
+
   F --> J{"¿Revisión aprobada?"}
   J -->|"No"| C
   J -->|"Sí"| H["ROL-DIGITACION digita póliza"]
@@ -91,43 +132,44 @@ flowchart TD
   K -->|"Sí"| R["ROL-REVISION revisión final"]
   
   R --> S{"¿Revisión aprobada?"}
-  S -->|"No"| F
+  S -->|"No"| P{"Devolver a digitación"}
+  P --> |"Si"| H
+  P -->|"No"| D
   S -->|"Sí"| I["ROL-FINIQUITO"]
 
   I --> N["Validar automáticamente y cargar en SIP"]
   N --> O["Trámite finalizado"]
-```
 
+
+```
+** explicar cuando el tramite queda en pendientes de ROL-TRAMITE.
 ## 7. Documentos requeridos
 
 | Orden | Documento | Código | Obligatorio | Responsable de validación | Observaciones |
 |---:|---|---|---|---|---|
-| 1 | Solicitud de hogar - parte 1 | DOC-SOLICITUD-HOGARSEG-P1 | Sí | ROL-CAD | Documento base del trámite |
-| 2 | Solicitud de hogar - parte 2 | DOC-SOLICITUD-HOGARSEG-P2 | Sí | ROL-CAD | Documento base del trámite |
-| 3 | Solicitud de hogar - parte 3 | DOC-SOLICITUD-HOGARSEG-P3 | Sí | ROL-CAD | Documento base del trámite |
-| 4 | Solicitud de hogar - parte 4 | DOC-SOLICITUD-HOGARSEG-P4 | Sí | ROL-CAD | Documento base del trámite |
+| 1 | Solicitud de hogar seguro 2000 - parte 1 | DOC-SOLICITUD-HOGARSEG-P1 | Sí | ROL-CAD | Documento base del trámite |
+| 2 | Solicitud de hogar seguro 2000 - parte 2 | DOC-SOLICITUD-HOGARSEG-P2 | Sí | ROL-CAD | Documento base del trámite |
+| 3 | Solicitud de hogar seguro 2000 - parte 3 | DOC-SOLICITUD-HOGARSEG-P3 | Sí | ROL-CAD | Documento base del trámite |
+| 4 | Solicitud de hogar seguro 2000 - parte 4 | DOC-SOLICITUD-HOGARSEG-P4 | Sí | ROL-CAD | Documento base del trámite |
 | 5 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
 | 6 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 7 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
-
-## 8. Datos del trámite
+| 7 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
+| 8 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
 
 ---
-
-# 5. Campos actuales del trámite
+## 8. Datos del trámite
 
 Los campos se documentan usando el **nombre actual del campo**, la **sección del formulario** y el **tipo de dato** informado en el archivo de campos.
 
-## 5.1 Datos generales de la solicitud
+## 8.1 Datos generales de la solicitud
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
-| FECHA DE SOLICITUD | `Fecha` | Fecha | Date | Fecha de ingreso o firma de solicitud |
+| FECHA DE SOLICITUD | `Fecha` | Fecha y Hora | Date | Fecha de ingreso o firma de solicitud |
 | TIPO DE TRAMITE | `TIPOTRAMITE` | Tipo | List | Debe corresponder a Emisión |
-| TIPO DE TRAMITE | `PolizaMadre` | Póliza Colectiva | Text | Aplica si pertenece a póliza colectiva |
 | TIPO DE TRAMITE | `Poliza` | Poliza | Text | Número de póliza si corresponde |
 
-## 5.3 Datos del asegurado
+## 8.2 Datos del asegurado
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
@@ -144,19 +186,42 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | DATOS DEL ASEGURADO | `Asegurado.Notificacion` | Notificar | List | Tomador o asegurado |
 | DATOS DEL ASEGURADO | `Asegurado.MedioNotificacion` | Notificar vía | List | Domicilio, teléfono, correo, apartado postal o fax |
 
-## 5.9 Prima y observaciones
+## 8.3 Datos de la propiedad
+| Sección | Campo actual | Label | Tipo de dato | Uso |
+|---|---|---|---|---|
+|DATOS DE LA PROPIEDAD | `Propiedad.Finca` | Nro de Folio o finca | Text | Numero de folio real o finca |
+|INTERES ASEGURABLE | `InteresAsegurable` | Interés Asegurable | List | Lista de intereses asegurables |
+
+## 8.4 Datos del Acreedor
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
-| PRIMA DEL SEGURO | `Prima.Subtotal` | Subtotal | Number | Prima antes de ajustes |
-| PRIMA DEL SEGURO | `Prima.FactorExperiencia` | Experiencia Siniestral | Number | Factor de experiencia |
-| PRIMA DEL SEGURO | `Prima.IVA` | Impuestos IVA | Number | Impuestos |
+| DATOS DEL ACREEDOR | `Acreedor.Nombre` | Acreedor | Text | Aplica si existe acreedor |
+| DATOS DEL ACREEDOR | `Acreedor.Identificacion` | Id Acreedor | Text | Identificación del acreedor |
+| DATOS DEL ACREEDOR | `Acreedor.TipoIdentificacion` | Tipo de Identificación Acreedor | List | Catálogo del sistema |
+| DATOS DEL ACREEDOR | `Acreedor.Monto` | Acreedor Monto | Number | Monto acreedor |
+| DATOS DEL ACREEDOR | `Acreedor.Grado` | Grado Acreencia | Number | Grado de acreencia |
+
+## 8.5 Prima y observaciones
+| Sección | Campo actual | Label | Tipo de dato | Uso |
+|---|---|---|---|---|
 | PRIMA DEL SEGURO | `Prima` | Prima Total | Number | Prima total |
 | OBSERVACIONES | `Observaciones` | Observaciones | Text | Comentarios generales |
 
-## 11. Pasos operativos por rol
+## 8.6 Datos de la poliza
 
-### 11.1 CAD
+| Sección | Campo actual | Label | Tipo de dato | Uso |
+|---|---|---|---|---|
+| DATOS DE LA POLIZA | `FormaAseguramiento` | Forma de Aseguramiento | List | Valor Declarado, Primer riesgo absoluto o Valor convenido |
+| DATOS DE LA POLIZA | `Vigencia.Desde` | Vigencia Desde | Date | Fecha desde |
+| DATOS DE LA POLIZA | `Vigencia.Hasta` | Vigencia Hasta | Date | Fecha hasta |
+| DATOS DE LA POLIZA | `Vigencia.Periodo` | Vigencia | List | Anual o Corto Plazo |
+| DATOS DE LA POLIZA | `FormaDePago` | Forma de pago | List | Debe tomarse del sistema |
+| DATOS DE LA POLIZA | `ConductoDeCobro` | Via de pago | List | Cargo Automático o Deducción Mensual |
+
+## 9. Pasos operativos por rol
+
+### 9.1 CAD
 
 #### Entrada
 
@@ -168,8 +233,8 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 1. Cargar documentos.
 2. Validar documentos requeridos.
-3. Validar consistencia de datos.
-4. Validar consistencia de documentos.
+3. Buscar en el registro y cargar el documento.
+4. Validar consistencia de datos.
 5. Crear trámite.
 6. Completar datos faltantes.
 7. Enviar a ROL-TRAMITES
@@ -181,27 +246,22 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Documentación incompleta | Agente |
 | Documentación completa | ROL-REVISION |
 | Requiere tratamiento especial | ROL-TRAMITES |
-| Puede digitarse | ROL-DIGITACION |
-| Puede finalizarse | ROL-FINIQUITO |
 
-### 11.2 Revisión
+### 9.2 Revisión
 
 #### Entrada
 
 - Trámite creado por CAD.
 - Documentos validados.
 - Datos extraídos.
-- Alertas de reglas.
 
 #### Tareas
 
 1. Completar cotización si no fue adjuntada.
 2. Validar información técnica.
-3. Validar interés asegurable.
-4. Informar prima deseada.
-5. Completar emisión desde / hasta.
-6. Completar tipo y código de contrato.
-7. Enviar a digitación.
+3. Informar prima deseada.
+4. Completar emisión desde / hasta.
+5. Enviar a digitación.
 
 #### Salidas posibles
 
@@ -211,20 +271,19 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Requiere sede o trámite especial | ROL-TRAMITES |
 | Aprobado para digitar | ROL-DIGITACION |
 
-### 11.3 Digitación
+### 9.3 Digitación
 
 #### Entrada
 
 - Datos ordenados del sistema.
 - Indicaciones del revisor.
-- Alertas aplicables.
 
 #### Tareas
 
 1. Tomar datos desde el sistema.
-2. Cargar datos en sistemas del INS.
+2. Cargar datos en sistemas del INS, preferentemente copiar y pegar.
 3. Digitar la póliza.
-4. Registrar resultado.
+4. Registrar resultado, carga numero de poliza.
 5. Enviar a revisión final.
 
 #### Salidas posibles
@@ -232,80 +291,48 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Resultado | Próximo rol |
 |---|---|
 | Póliza digitada | ROL-REVISION |
-| Error detectado | ROL-DIGITACION |
-| Requiere aclaración | ROL-REVISION |
+| Error detectado | ROL-REVISION |
 
-### 11.4 Revisión final
+### 9.4 Revisión final
 
 #### Entrada
 
 - Póliza digitada.
 - Datos del sistema.
-- Condiciones de póliza.
 
 #### Tareas
 
 1. Validar que la digitación sea correcta.
-2. Verificar póliza en sistemas del INS.
-3. Comparar datos emitidos contra datos del sistema.
-4. Registrar condiciones.
-5. Enviar a finiquito si corresponde.
+2. Enviar a finiquito.
+3. Devolver a digitación si hay errores.
 
 #### Salidas posibles
 
 | Resultado | Próximo rol |
 |---|---|
 | Digitación incorrecta | ROL-DIGITACION |
-| Datos no coinciden | ROL-REVISION |
 | Datos correctos | ROL-FINIQUITO |
 
-### 11.5 Finiquito
+### 9.5 Finiquito
 
 #### Entrada
 
 - Póliza verificada.
 - Datos coincidentes.
-- Condiciones registradas.
 
 #### Tareas
 
-1. Generar finiquito.
+1. Enviar notificacion al asegurado y al agente.
 2. Cerrar trámite.
 3. Dejar trazabilidad del cierre.
 
-## 12. Alertas del sistema
+## 10. Alertas del sistema
 
 | Código | Mensaje | Condición | Rol visible |
 |---|---|---|---|
-| ALERT-VIGENCIA-CORTO-PLAZO | La vigencia es de corto plazo. Revisar envío a sede. | Vigencia = Corto Plazo | ROL-CAD / ROL-REVISION |
-| ALERT-VEHICULO-MODIFICADO | Vehículo modificado o hecho a medida. Requiere revisión especial. | Vehículo modificado = Sí | ROL-CAD / ROL-REVISION |
-| ALERT-EXONERADO | Vehículo exonerado. Validar forma de aseguramiento. | Exonerado = Sí | ROL-DIGITACION |
-| ALERT-EXTRA-PRIMA | Aplica extra prima en repuestos. Validar digitación. | Extra prima = Sí | ROL-DIGITACION |
-| ALERT-ACREEDOR | El trámite posee acreedor. Completar datos correspondientes. | Acreedor = Sí | ROL-DIGITACION |
-| ALERT-BENEFICIARIO | El trámite posee beneficiario. Completar datos correspondientes. | Beneficiario = Sí | ROL-DIGITACION |
-
-## 13. Observaciones funcionales
-
-- El sistema debe permitir devolución al agente cuando falten requisitos.
-- El sistema debe permitir devolución a CAD cuando el trámite no pueda realizarse desde digitación.
-- Las devoluciones deberían manejarse con un modelo híbrido:
-  - motivo tipificado;
-  - observación libre;
-  - documentos o datos requeridos.
-- Las reglas deben quedar registradas con código estable.
-- Las alertas deben ser visibles por rol y por etapa.
-- El sistema debería guardar trazabilidad de:
-  - usuario;
-  - rol;
-  - fecha;
-  - acción;
-  - regla aplicada;
-  - destino del trámite.
-
-
-## 14. Historial de cambios
+## 11. Historial de cambios
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
 | 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | No |
-
+| 1.1 | 2026-07-17 | Equipo funcional | Copia del flujo definido en Hogar Comprensivo | No |

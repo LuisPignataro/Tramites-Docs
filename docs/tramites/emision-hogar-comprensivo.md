@@ -1,7 +1,7 @@
 ---
 id: TRAM-HOGAR-COMPRENSIVO-EMISION
 titulo: Emisión de Hogar Comprensivo
-version: 1.0
+version: 1.4
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -24,6 +24,7 @@ documentos:
 sistemas_relacionados:
   - Pricose
   - INS
+  - Registro nacional
 ultima_revision: 2026-07-15
 ---
 
@@ -69,9 +70,11 @@ ROL-TRAMITES actua como un revisor, puede cargar la cotización si no existe, pe
 
 - Se debe ingresar el valor **Referencia** para hacer seguimiento del tramite.
 - Los tramites en ROL-TRAMITES quedan en **Pendientes** mientras la SEDE realiza su trabajo.
+
 - ➜ **ENVÍA** a ROL-FINIQUITO una vez emitida la póliza e ingresado el número de póliza.
 - ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el CAD haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
+
 ## 4. ROL-DIGITACION, cuarto paso Digitación 
 Digita la póliza en los sistemas del INS, debe ingresar el **número de póliza**.
 
@@ -104,7 +107,11 @@ Lee la póliza vía webservice y la carga en SIP.
 ```mermaid
 flowchart TD
   A["1. ROL-CAD recibe la solicitud"] --> B{"Documentación mínima completa?"}
-  B -->|"No"| C["ROL-CAD pendientes: Devolver para completar documentos"]
+  B -->|"No"| C["ROL-CAD pendientes: 
+   - Devolver al agente
+   - Espera documentacion
+   -Vuelve a quien lo remitio
+  "]
   B -->|"Sí"| D["ROL-CAD completa datos"]
 
   D --> E{"¿A qué rol deriva?"}
@@ -116,7 +123,9 @@ flowchart TD
   M -->|"Sí"| K1
 
   K1["Registrar referencia y completar la gestión"]
-  K1 --> I
+  K1 --> K2["Queda en pendiente esperando al INS"]
+  K2 -->|"Finalizado"| I["ROL-FINIQUITO"]
+  K2 -->|"Faltan requisitos"| C
 
   F --> J{"¿Revisión aprobada?"}
   J -->|"No"| C
@@ -137,7 +146,7 @@ flowchart TD
 
 
 ```
-
+** explicar cuando el tramite queda en pendientes de ROL-TRAMITE.
 ## 7. Documentos requeridos
 
 | Orden | Documento | Código | Obligatorio | Responsable de validación | Observaciones |
@@ -153,15 +162,12 @@ flowchart TD
 | 9 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
 | 10 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
 
-## 8. Datos del trámite
-
 ---
-
-# 5. Campos actuales del trámite
+## 8. Datos del trámite
 
 Los campos se documentan usando el **nombre actual del campo**, la **sección del formulario** y el **tipo de dato** informado en el archivo de campos.
 
-## 5.1 Datos generales de la solicitud
+## 8.1 Datos generales de la solicitud
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
@@ -169,7 +175,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | TIPO DE TRAMITE | `TIPOTRAMITE` | Tipo | List | Debe corresponder a Emisión |
 | TIPO DE TRAMITE | `Poliza` | Poliza | Text | Número de póliza si corresponde |
 
-## 5.2 Datos del asegurado
+## 8.2 Datos del asegurado
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
@@ -186,13 +192,13 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | DATOS DEL ASEGURADO | `Asegurado.Notificacion` | Notificar | List | Tomador o asegurado |
 | DATOS DEL ASEGURADO | `Asegurado.MedioNotificacion` | Notificar vía | List | Domicilio, teléfono, correo, apartado postal o fax |
 
-## 5.3 Datos de la propiedad
+## 8.3 Datos de la propiedad
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
 |DATOS DE LA PROPIEDAD | `Propiedad.Finca` | Nro de Folio o finca | Text | Numero de folio real o finca |
 |INTERES ASEGURABLE | `InteresAsegurable` | Interés Asegurable | List | Lista de intereses asegurables |
 
-## 5.4 Datos del Acreedor
+## 8.4 Datos del Acreedor
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
@@ -200,15 +206,15 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | DATOS DEL ACREEDOR | `Acreedor.Identificacion` | Id Acreedor | Text | Identificación del acreedor |
 | DATOS DEL ACREEDOR | `Acreedor.TipoIdentificacion` | Tipo de Identificación Acreedor | List | Catálogo del sistema |
 | DATOS DEL ACREEDOR | `Acreedor.Monto` | Acreedor Monto | Number | Monto acreedor |
-| DATOS DEL ACREEDOR | `Acreedor.Grado` | Grado Acreencia | Text | Grado de acreencia |
+| DATOS DEL ACREEDOR | `Acreedor.Grado` | Grado Acreencia | Number | Grado de acreencia |
 
-## 5.5 Prima y observaciones
+## 8.5 Prima y observaciones
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
 | PRIMA DEL SEGURO | `Prima` | Prima Total | Number | Prima total |
 | OBSERVACIONES | `Observaciones` | Observaciones | Text | Comentarios generales |
 
-## 5.6 Datos de la poliza
+## 8.6 Datos de la poliza
 
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
@@ -219,9 +225,9 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | DATOS DE LA POLIZA | `FormaDePago` | Forma de pago | List | Debe tomarse del sistema |
 | DATOS DE LA POLIZA | `ConductoDeCobro` | Via de pago | List | Cargo Automático o Deducción Mensual |
 
-## 11. Pasos operativos por rol
+## 9. Pasos operativos por rol
 
-### 11.1 CAD
+### 9.1 CAD
 
 #### Entrada
 
@@ -247,7 +253,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Documentación completa | ROL-REVISION |
 | Requiere tratamiento especial | ROL-TRAMITES |
 
-### 11.2 Revisión
+### 9.2 Revisión
 
 #### Entrada
 
@@ -271,7 +277,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Requiere sede o trámite especial | ROL-TRAMITES |
 | Aprobado para digitar | ROL-DIGITACION |
 
-### 11.3 Digitación
+### 9.3 Digitación
 
 #### Entrada
 
@@ -293,7 +299,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Póliza digitada | ROL-REVISION |
 | Error detectado | ROL-REVISION |
 
-### 11.4 Revisión final
+### 9.4 Revisión final
 
 #### Entrada
 
@@ -313,7 +319,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Digitación incorrecta | ROL-DIGITACION |
 | Datos correctos | ROL-FINIQUITO |
 
-### 11.5 Finiquito
+### 9.5 Finiquito
 
 #### Entrada
 
@@ -326,13 +332,11 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 2. Cerrar trámite.
 3. Dejar trazabilidad del cierre.
 
-## 12. Alertas del sistema
+## 10. Alertas del sistema
 
 | Código | Mensaje | Condición | Rol visible |
 |---|---|---|---|
-
-
-## 14. Historial de cambios
+## 11. Historial de cambios
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
@@ -340,5 +344,5 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final | No |
 | 1.2 | 2026-07-15 | Reunion Kenneth Karen Luis | Documentos, Workflow, se agrega tramites, ajustes en todo el documento | No |
 | 1.3 | 2026-07-17 | Email Kenneth | Cambios en el flujo | No |
+| 1.4 | 2026-07-17 | Reunión Kenneth, Luis, José | Se confirman correcciones de email, se decide dejar el rol de tramites como está hasta mejorar el sistema | No |
 
-Una vez aprobado por Kenneth se copia a Hogar seguro e incendio comercial todo el flujo de emisión y se ajusta a cada producto. 
