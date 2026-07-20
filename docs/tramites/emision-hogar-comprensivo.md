@@ -1,7 +1,7 @@
 ---
 id: TRAM-HOGAR-COMPRENSIVO-EMISION
 titulo: Emisión de Hogar Comprensivo
-version: 1.4
+version: 1.5
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -25,7 +25,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro nacional
-ultima_revision: 2026-07-15
+ultima_revision: 2026-07-20
 ---
 
 # Emisión de Hogar Comprensivo
@@ -141,7 +141,10 @@ flowchart TD
   P -->|"No"| D
   S -->|"Sí"| I["ROL-FINIQUITO"]
 
-  I --> N["Validar automáticamente y cargar en SIP"]
+  I --> N["- Validar automáticamente
+   - Cargar en SIP
+   - En caso de diferencias devolver
+   al rol de origen"]
   N --> O["Trámite finalizado"]
 
 
@@ -345,4 +348,4 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | 1.2 | 2026-07-15 | Reunion Kenneth Karen Luis | Documentos, Workflow, se agrega tramites, ajustes en todo el documento | No |
 | 1.3 | 2026-07-17 | Email Kenneth | Cambios en el flujo | No |
 | 1.4 | 2026-07-17 | Reunión Kenneth, Luis, José | Se confirman correcciones de email, se decide dejar el rol de tramites como está hasta mejorar el sistema | No |
-
+| 1.5 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | No |

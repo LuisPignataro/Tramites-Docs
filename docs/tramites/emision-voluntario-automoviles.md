@@ -1,7 +1,7 @@
 ---
 id: TRAM-AUTO-EMISION
 titulo: Emisión de Automóvil
-version: 1.1
+version: 1.2
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -27,7 +27,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro Nacional
-ultima_revision: 2026-07-10
+ultima_revision: 2026-07-20
 ---
 
 # Emisión de Automóvil
@@ -98,8 +98,7 @@ flowchart TD
   F --> J{"¿Revisión aprobada?"}
   J -->|"No"| D
   J -->|"Sí"| H["ROL-DIGITACION"]
-
-  H --> R["ROL-REVISION"]
+  
   R --> S{"¿Revisión aprobada?"}
   S -->|"No"| H
   S -->|"Sí"| I["ROL-FINIQUITO"]
@@ -109,10 +108,14 @@ flowchart TD
 
   H --> L["Digitar póliza en el INS"]
   L --> M["Enviar a revisión final"]
-  M --> F
+  M --> R["ROL-REVISION"]
 
   I --> N["Validar automáticamente y cargar en SIP"]
-  N --> O["Trámite finalizado"]
+  N --> O{"¿Validación exitosa?"}
+  O -->|"No"| H
+  O -->|"Sí"| Z
+  
+  Z["Trámite finalizado"]
 ```
 
 ## 7. Documentos requeridos
@@ -427,3 +430,4 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 |---|---|---|---|---|
 | 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | Sí |
 | 1.1 | 2026-07-14 | Equipo funcional | Se agregó regla de derivación para Valor convenido = Sí | No |
+| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito, correccion luego de digitacion | No |

@@ -1,7 +1,7 @@
 ---
 id: TRAM-HOGAR-SEGURO-2000
 titulo: Emisión de Hogar Seguro 2000
-version: 1.1
+version: 1.2
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -21,7 +21,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro nacional
-ultima_revision: 2026-07-13
+ultima_revision: 2026-07-20
 ---
 
 # Emisión de Hogar Seguro 2000
@@ -137,7 +137,10 @@ flowchart TD
   P -->|"No"| D
   S -->|"Sí"| I["ROL-FINIQUITO"]
 
-  I --> N["Validar automáticamente y cargar en SIP"]
+  I --> N["- Validar automáticamente
+   - Cargar en SIP
+   - En caso de diferencias devolver
+   al rol de origen"]
   N --> O["Trámite finalizado"]
 
 
@@ -336,3 +339,4 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 |---|---|---|---|---|
 | 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | No |
 | 1.1 | 2026-07-17 | Equipo funcional | Copia del flujo definido en Hogar Comprensivo | No |
+| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | No |
