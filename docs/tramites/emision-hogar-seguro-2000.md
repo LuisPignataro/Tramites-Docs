@@ -1,8 +1,8 @@
 ---
 id: TRAM-HOGAR-SEGURO-2000
 titulo: Emisión de Hogar Seguro 2000
-version: 1.2
-estado: borrador
+version: 1.3
+estado: final
 workflow: WF-CAD-REV-DIG-FIN
 roles:
   - ROLE-CAD
@@ -21,7 +21,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro nacional
-ultima_revision: 2026-07-20
+ultima_revision: 2026-08-07
 ---
 
 # Emisión de Hogar Seguro 2000
@@ -337,6 +337,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | No |
-| 1.1 | 2026-07-17 | Equipo funcional | Copia del flujo definido en Hogar Comprensivo | No |
-| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | No |
+| 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | Si |
+| 1.1 | 2026-07-17 | Equipo funcional | Copia del flujo definido en Hogar Comprensivo | Si |
+| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | Si |
+| 1.3 | 2026-08-07 | Equipo funcional | Actualización de versión, fecha y estado de producción en historial | Si |

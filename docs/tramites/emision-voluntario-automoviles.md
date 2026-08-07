@@ -1,8 +1,8 @@
 ---
 id: TRAM-AUTO-EMISION
 titulo: Emisión de Automóvil
-version: 1.2
-estado: borrador
+version: 1.3
+estado: final
 workflow: WF-CAD-REV-DIG-FIN
 roles:
   - ROLE-CAD
@@ -27,7 +27,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro Nacional
-ultima_revision: 2026-07-20
+ultima_revision: 2026-08-07
 ---
 
 # Emisión de Automóvil
@@ -428,6 +428,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Versión | Fecha | Autor | Cambio | En producción |
 |---|---|---|---|---|
-| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | Sí |
-| 1.1 | 2026-07-14 | Equipo funcional | Se agregó regla de derivación para Valor convenido = Sí | No |
-| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito, correccion luego de digitacion | No |
+| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | Si |
+| 1.1 | 2026-07-14 | Equipo funcional | Se agregó regla de derivación para Valor convenido = Sí | Si |
+| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito, correccion luego de digitacion | Si |
+| 1.3 | 2026-08-07 | Equipo funcional | Actualización de versión, fecha y estado de producción en historial | Si |

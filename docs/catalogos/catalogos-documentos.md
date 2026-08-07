@@ -22,6 +22,9 @@ titulo: Catálogo de documentos
 | DOC-SOLICITUD-INC-HOGARCOMPREN-P4 | Solicitud Página 4 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-INC-HOGARCOMPREN-P5 | Solicitud Página 5 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-INC-HOGARCOMPREN-P6 | Solicitud Página 6 | Formulario principal de trámite | No | Documento base |
+| DOC-SOLICITUD-RT-P1 | Solicitud Página 1 | Formulario principal de trámite | No | Documento base del trámite RT |
+| DOC-SOLICITUD-RT-P2 | Solicitud Página 2 | Formulario principal de trámite | No | Documento base del trámite RT |
+| DOC-SOLICITUD-RT-P3 | Solicitud Página 3 | Formulario principal de trámite | No | Documento base del trámite RT |
 | DOC-SOLICITUD-HOGARSEG-P1 | Solicitud Página 1 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-HOGARSEG-P2 | Solicitud Página 2 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-HOGARSEG-P3 | Solicitud Página 3 | Formulario principal de trámite | No | Documento base |

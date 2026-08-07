@@ -2,7 +2,7 @@
 id: TRAM-INCENDIO-COMERCIAL
 titulo: Emisión de Incendio Comercial e industrial
 version: 1.2
-estado: borrador
+estado: final
 workflow: WF-CAD-REV-DIG-FIN
 roles:
   - ROLE-CAD

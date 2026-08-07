@@ -1,7 +1,7 @@
 ---
 id: TRAM-HOGAR-COMPRENSIVO-EMISION
 titulo: Emisión de Hogar Comprensivo
-version: 1.5
+version: 1.6
 estado: borrador
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -25,7 +25,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro nacional
-ultima_revision: 2026-07-20
+ultima_revision: 2026-08-07
 ---
 
 # Emisión de Hogar Comprensivo
@@ -343,9 +343,10 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | No |
-| 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final | No |
-| 1.2 | 2026-07-15 | Reunion Kenneth Karen Luis | Documentos, Workflow, se agrega tramites, ajustes en todo el documento | No |
-| 1.3 | 2026-07-17 | Email Kenneth | Cambios en el flujo | No |
-| 1.4 | 2026-07-17 | Reunión Kenneth, Luis, José | Se confirman correcciones de email, se decide dejar el rol de tramites como está hasta mejorar el sistema | No |
-| 1.5 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | No |
+| 1.0 | 2026-07-10 | Equipo funcional | Primera versión estandarizada | Si |
+| 1.1 | 2026-07-13 | Equipo funcional | Documento faltante, Ajustes en flujo de digitación y revisión final | Si |
+| 1.2 | 2026-07-15 | Reunion Kenneth Karen Luis | Documentos, Workflow, se agrega tramites, ajustes en todo el documento | Si |
+| 1.3 | 2026-07-17 | Email Kenneth | Cambios en el flujo | Si |
+| 1.4 | 2026-07-17 | Reunión Kenneth, Luis, José | Se confirman correcciones de email, se decide dejar el rol de tramites como está hasta mejorar el sistema | Si |
+| 1.5 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | Si |
+| 1.6 | 2026-08-07 | Equipo funcional | Actualización de versión, fecha y estado de producción en historial | Si |
