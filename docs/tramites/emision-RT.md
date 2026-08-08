@@ -113,60 +113,28 @@ Lee la póliza vía webservice y la carga en SIP.
 
 ```mermaid
 flowchart TD
-  A["2. ROL-CAD recibe la solicitud"] --> B{"Documentación mínima completa?"}
-  B -->|"No"| C["ROL-CAD pendientes: 
-   - Devolver al agente
-   - Espera documentación
-   - Vuelve a quien lo remitió
-  "]
-  B -->|"Sí"| D["ROL-CAD completa datos"]
+  INICIO(["Inicio"]) --> P2["2. ROL-CAD"]
 
-  D --> E{"¿Ruta del trámite?"}
-  E -->|"3.a Revisión técnica"| F["ROL-REVISION<br/>Valida información técnica"]
-  E -->|"3.b ROL-TRAMITES"| G["ROL-TRAMITES<br/>Revisión especial/sede"]
-
-  G --> G1{"¿Aprobado?"}
-  G1 -->|"No"| C
-  G1 -->|"Sí"| G2["Registrar referencia<br/>Ingresa datos faltantes"]
-  G2 --> I1["ENVÍA a ROL-FINIQUITO"]
-
-  F --> J{"¿Revisión aprobada?"}
-  J -->|"No"| C
-  J -->|"Sí"| H["4. ROL-DIGITACION<br/>Digita póliza en INS"]
-
-  H --> K{"¿Digitación correcta?"}
-  K -->|"No"| F
-  K -->|"Sí"| R["5. ROL-REVISION<br/>Revisión final"]
+  P2 -->|"ENVÍA según datos del trámite"| P3_a["3.a ROL-REVISION"]
+  P2 -->|"ENVÍA según datos del trámite"| P3_b["3.b ROL-TRAMITES"]
+  P2 -->|"DEVUELVE"| AGENTE["Agente"]
   
-  R --> S{"¿Validación exitosa?"}
-  S -->|"No - Errores detectados"| T5_1["5.1 ROL-TRAMITES<br/>Corrección de errores"]
-  S -->|"Sí - Póliza digitada"| T5_2["5.2 ROL-REVISION<br/>Corrección validada"]
+  P3_a -->|"ENVÍA"| P4["4. ROL-DIGITACION"]
+ 
+  P3_b -->|"ENVÍA"| P6["6. ROL-FINIQUITO"]
+ 
 
-  T5_1 --> T5_1A["Ingresa Referencia<br/>SEDE realiza correcciones<br/>Queda en Pendientes"]
-  T5_1A --> T5_1B{"Correcciones completadas?"}
-  T5_1B -->|"Sí"| R
-  T5_1B -->|"Error persiste"| C
+  P4 -->|"ENVÍA"| P5["5. ROL-REVISION"]
+  P4 -->|"DEVUELVE"| P3_a
 
-  T5_2 --> T5_2A{"¿Correcciones necesarias?"}
-  T5_2A -->|"Sí - Requiere re-emisión"| H
-  T5_2A -->|"No - Póliza válida"| I["6. ROL-FINIQUITO"]
+  P5 --> D5{"5. ¿Todo correcto?"}
+  D5 -->|"Sí: ENVÍA"| P6
+  D5 -->|"No: DEVUELVE"| P5_1["5.1 ROL-TRAMITES"]
+  P5_1 -->|"FINALIZA correcciones"| P5
 
-  I1 --> I
-
-  I --> N["- Validar automáticamente<br/>- Leer póliza vía webservice<br/>- Cargar en SIP<br/>- Enviar notificación al asegurado y agente<br/>- Cierra trámite"]
-  N --> O["Trámite finalizado"]
-
-
+  P6 --> P7(["7. Trámite cerrado"])
 ```
-** Puntos explicados:
-- **Punto 2:** CAD recibe solicitud, valida documentación mínima, completa datos
-- **Punto 3.a:** ROL-REVISION valida información técnica
-- **Punto 3.b:** ROL-TRAMITES actúa como revisor especial (puede cargar cotización, ingresa referencia)
-- **Punto 4:** ROL-DIGITACION digita la póliza en sistemas del INS
-- **Punto 5:** ROL-REVISION revisión final
-- **Punto 5.1:** ROL-TRAMITES corrección de errores (cuando revisión final detecta problemas)
-- **Punto 5.2:** ROL-REVISION corrección de errores (valida que correcciones sean suficientes)
-- **Punto 6:** ROL-FINIQUITO carga en SIP y cierra trámite
+
 ## 8. Documentos requeridos
 
 | Orden | Documento | Código | Obligatorio | Responsable de validación | Observaciones |

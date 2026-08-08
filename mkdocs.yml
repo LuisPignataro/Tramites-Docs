@@ -35,6 +35,7 @@ nav:
       - Emision Hogar Seguro 2000: tramites/emision-hogar-seguro-2000.md
       - Emision Incendio Comercial: tramites/emision-incendio-comercial.md
       - Emision RT: tramites/emision-RT.md
+      - Rehabilitacion RT: tramites/rehabilitacion-RT.md
       - Emision Voluntario Automoviles: tramites/emision-voluntario-automoviles.md
   - Workflows:
       - CAD Revision Digitacion y Finiquito: workflows/wf-cad-revision-digitacion-finiquito.md

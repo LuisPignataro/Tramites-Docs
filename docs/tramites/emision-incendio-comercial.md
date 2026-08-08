@@ -1,7 +1,7 @@
 ---
 id: TRAM-INCENDIO-COMERCIAL
 titulo: Emisión de Incendio Comercial e industrial
-version: 1.2
+version: 1.3
 estado: final
 workflow: WF-CAD-REV-DIG-FIN
 roles:
@@ -23,7 +23,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro nacional
-ultima_revision: 2026-07-20
+ultima_revision: 2026-08-07
 ---
 
 # Emisión de Incendio Comercial
@@ -341,6 +341,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 ## 10. Historial de cambios
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | No |
-| 1.1 | 2026-07-17 | Equipo funcional | Se copia el flujo de Hogar comprensivo | No |
-| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | No |
+| 1.0 | 2026-07-14 | Equipo funcional | Primera versión estandarizada | Si |
+| 1.1 | 2026-07-17 | Equipo funcional | Se copia el flujo de Hogar comprensivo | Si |
+| 1.2 | 2026-07-20 | Equipo funcional | Flujo en caso de error en finiquito | Si |
+| 1.3 | 2026-08-07 | Equipo funcional | Flujo en caso de error en finiquito | Si |

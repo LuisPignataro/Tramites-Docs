@@ -25,6 +25,7 @@ titulo: Catálogo de documentos
 | DOC-SOLICITUD-RT-P1 | Solicitud Página 1 | Formulario principal de trámite | No | Documento base del trámite RT |
 | DOC-SOLICITUD-RT-P2 | Solicitud Página 2 | Formulario principal de trámite | No | Documento base del trámite RT |
 | DOC-SOLICITUD-RT-P3 | Solicitud Página 3 | Formulario principal de trámite | No | Documento base del trámite RT |
+| DOC-REHABILITACION-RT | Rehabilitación RT | Documento para solicitar la rehabilitación de una póliza de riesgos de trabajo | No | Reemplaza la solicitud RT completa en el trámite de rehabilitación |
 | DOC-SOLICITUD-HOGARSEG-P1 | Solicitud Página 1 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-HOGARSEG-P2 | Solicitud Página 2 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-HOGARSEG-P3 | Solicitud Página 3 | Formulario principal de trámite | No | Documento base |
