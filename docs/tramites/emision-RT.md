@@ -20,7 +20,7 @@ sistemas_relacionados:
   - Pricose
   - INS
   - Registro nacional
-ultima_revision: 2026-08-07
+ultima_revision: 2026-08-11
 ---
 
 # Emisión de Riesgos de Trabajo
@@ -37,8 +37,6 @@ El sistema muestra los documentos faltantes en caso de que no se hayan adjuntado
 Si los documentos minimos requeridos están presentes se hace una revisón de los datos extraídos con el **asistente para crear tramites** y se valida la consistencia de la información.
 
 - Verifica si la póliza existe en el INS. Completa el campo **"Cuenta con numero de poliza, si o no"**
-- En caso de que la solicitud diga propietario y no lo sea:
-  - ↩ **DEVUELVE** al Agente y queda en **Pendientes** mientras el Agente realiza su trabajo.
 
 ROL-CAD debe completar los datos faltantes.
 
@@ -311,3 +309,4 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
 | 1.0 | 2026-08-07 | Equipo funcional | Primera versión estandarizada | No |
+| 1.1 | 2026-08-11 | Equipo funcional | Corrección solicitada por Kenneth | No |
