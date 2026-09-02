@@ -92,8 +92,7 @@ La **Opción A** y la **Opción B** son alternativas. No se requieren ambas para
 | 4 | B | Rehabilitación RT | DOC-REHABILITACION-RT | Sí, para Opción B | ROL-CAD | Reemplaza las tres partes de la solicitud RT |
 | 5 | - | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
 | 6 | - | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 7 | - | Cotización | DOC-COTIZACION | Condicional | ROL-TRAMITES | Puede ser cargada durante la gestión |
-| 8 | - | Registro nacional | DOC-REGISTRO-NACIONAL | No | ROL-CAD | Documento de consulta web |
+| 7 | - | Registro nacional | DOC-REGISTRO-NACIONAL | No | ROL-CAD | Documento de consulta web |
 
 ## 7. Datos del trámite
 
@@ -213,4 +212,4 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-08-08 | Equipo funcional | Primera versión del documento | No |
+| 1.0 | 2026-08-08 | Equipo funcional | Primera versión del documento | Si |

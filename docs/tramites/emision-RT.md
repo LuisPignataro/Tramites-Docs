@@ -142,8 +142,7 @@ flowchart TD
 | 3 | Solicitud de riesgos de trabajo - parte 3 | DOC-SOLICITUD-RT-P3 | Sí | ROL-CAD | Documento base del trámite |
 | 7 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
 | 8 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 9 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
-| 10 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
+| 9 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
 
 ---
 ## 9. Datos del trámite
@@ -308,5 +307,5 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-08-07 | Equipo funcional | Primera versión estandarizada | No |
-| 1.1 | 2026-08-11 | Equipo funcional | Corrección solicitada por Kenneth | No |
+| 1.0 | 2026-08-07 | Equipo funcional | Primera versión estandarizada | Si |
+| 1.1 | 2026-08-11 | Equipo funcional | Corrección solicitada por Kenneth | Si |
