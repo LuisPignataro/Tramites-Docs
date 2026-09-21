@@ -10,10 +10,10 @@ roles:
   - ROLE-FINIQUITO
 documentos:
   - DOC-SOLICITUD-GENRICA
- sistemas_relacionados:
+sistemas_relacionados:
   - Pricose
   - INS
- ultima_revision: 2026-09-21
+ultima_revision: 2026-09-21
 ---
 
 # Tramite generico en Sede
@@ -59,7 +59,7 @@ flowchart TD
   CAD -->|"Documentación incompleta"| AGENTE["Agente completa documentos"]
   AGENTE --> CAD
   CAD -->|"Documentación y datos válidos"| TRAMITES["2. ROL-TRAMITES"]
-  TRAMITES -->|"Póliza rehabilitada"| FINIQUITO["3. ROL-FINIQUITO"]
+  TRAMITES -->|"Realizado"| FINIQUITO["3. ROL-FINIQUITO"]
   FINIQUITO --> CIERRE(["4. Trámite cerrado"])
 ```
 

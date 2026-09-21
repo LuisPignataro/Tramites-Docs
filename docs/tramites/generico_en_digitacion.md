@@ -20,30 +20,26 @@ ultima_revision: 2026-09-21
 
 ## 1. Resumen
 
-El trámite de **Trámite genérico en Digitación** permite gestionar una solicitud genérica en la sede.
+El trámite de **Trámite genérico en Digitación** permite gestionar una solicitud genérica por digitación.
 
-El trámite ingresa al ROL-DIGITACION **Digitación**. Digitación valida la documentación, extrae los datos relevantes y crea el trámite en el sistema. Después de Digitación, el único flujo posible es ROL-TRAMITES, seguido de ROL-FINIQUITO y el cierre del trámite.
+El trámite ingresa al **ROL-CAD**. Cad valida la documentación, extrae los datos relevantes y crea el trámite en el sistema. Después de Cad, el único flujo posible es ROL-REVISION.
 
 ## 2. ROL-CAD, primer paso
 
-El sistema muestra los documentos faltantes. CAD puede solicitar que se complete la documentación y mantener la solicitud en espera.
+El sistema muestra los documentos. CAD puede solicitar que se complete la documentación y mantener la solicitud en espera.
 
 El requisito documental es a criterio del usuario.
 
-- La solicitud genérica, se utiliza en reemplazo de cualquier documento requerido para el trámite.
+- La solicitud genérica, se utiliza en reemplazo de cualquier documento requerido para el trámite. El sistema necesita al menos un documentos que sustente los datos.
 
 Cuando la documentación mínima está presente, CAD revisa los datos extraídos con el **asistente para crear trámites** y valida la consistencia de la información.
 
 ## 3.a Revisión ROL-REVISION
-ROL-REVISION valida la información técnica, completa la cotización si no fue adjuntada.
-
-- Si no existe DOC-COTIZACION-AUT, el revisor debe cotizar y subir el documento. El tramite se envia al sistema para ser procesado y derivado a ROL-REVISION cuando esté listo.
-
-- Si la cotización existe, el revisor valida la información técnica y el interés asegurable. Si todo es correcto, ➜ **ENVÍA** a ROL-DIGITACION.
+ROL-REVISION valida la información técnica.
 
 - ➜ **ENVÍA** a ROL-DIGITACION para que se digite la póliza en los sistemas del INS o para realizar correcciones.
 - ➜ **ENVÍA** a ROL-FINIQUITO si la póliza ya fue digitada.
-- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el revisor haga las correcciones necesarias.
+- ↩ **DEVUELVE** a ROL-CAD si detecta inconsistencias, con comentarios para que el Agente haga las correcciones necesarias.
   - Los tramites devueltos a ROL-CAD quedan en **Pendientes** mientras CAD realiza su trabajo.
 
 ## 4. Digitación ROL-DIGITACION
@@ -54,10 +50,8 @@ Digita la póliza en los sistemas del INS, puede ingrear el **número de poliza*
 
 ## 5. ROL-FINIQUITO
 
-Lee la póliza vía webservice y la carga en SIP.
+Lee la póliza vía webservice y la carga o actualiza en SIP.
 
-Se realizan validaciones automáticas.
-En caso de no pasar las validaciones, ↩ **DEVUELVE** a ROL-REVISION para que se hagan las correcciones necesarias.
 ## 6. Diagrama del flujo para usuarios
 
 ```mermaid

@@ -45,3 +45,4 @@ titulo: Catálogo de documentos
 | DOC-REVISION-TECNICA | Revisión Técnica | Documento de revisión técnica | No | Condicional |
 | DOC-BOLETA-CARGO-AUTOMATICO | Boleta de Cargo Automático | Documento de cargo automático | No | Condicional |
 | DOC-COTIZACION-AUT | Cotización AUT | Documento de cotización AUT | No | Condicional |
+| DOC-SOLICITUD-GENERICA | Solicitud genérica | Documento genérico de soporte | Sí | Opcional | Reemplaza cualquier documento requerido para el trámite |
