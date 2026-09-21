@@ -37,6 +37,8 @@ nav:
       - Emision RT: tramites/emision-RT.md
       - Rehabilitacion RT: tramites/rehabilitacion-RT.md
       - Emision Voluntario Automoviles: tramites/emision-voluntario-automoviles.md
+      - Tramite Generico en Digitacion: tramites/generico_en_digitacion.md
+      - Tramite Generico en Sede: tramites/generico_en_sede.md
   - Workflows:
       - CAD Revision Digitacion y Finiquito: workflows/wf-cad-revision-digitacion-finiquito.md
   - Catalogos:
