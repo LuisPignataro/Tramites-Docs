@@ -56,10 +56,23 @@ ROL-FINIQUITO lee la póliza mediante el servicio web.
 ```mermaid
 flowchart TD
   INICIO(["Inicio"]) --> CAD["1. ROL-CAD"]
-  CAD -->|"Documentación incompleta"| AGENTE["Agente completa documentos"]
+
+  %% 1. ROL-CAD (Cad): Hold / Send::Sede
+  CAD -->|"Documentación incompleta: Mantener (Hold)"| AGENTE["Agente completa documentos"]
   AGENTE --> CAD
-  CAD -->|"Documentación y datos válidos"| TRAMITES["2. ROL-TRAMITES"]
-  TRAMITES -->|"Realizado"| FINIQUITO["3. ROL-FINIQUITO"]
+  CAD -->|"Documentación y datos válidos: ENVÍA a Sede"| TRAMITES["2. ROL-TRAMITES<br/>(recibe: Referencia vacía a completar)"]
+
+  %% 2. ROL-TRAMITES (Sede): al llegar desde CAD solo puede Mantener o Devolver a CAD
+  TRAMITES -->|"Gestión pendiente: Mantener (Hold)"| TRAMITES_PEND["2.1 ROL-TRAMITES en pendientes<br/>(Referencia y póliza confirmadas)"]
+  TRAMITES -->|"DEVUELVE a CAD"| CAD
+
+  %% 2.1 ROL-TRAMITES en pendientes: puede Finiquitar, Mantener o Devolver a CAD
+  TRAMITES_PEND -->|"Gestión pendiente: Mantener (Hold)"| TRAMITES_PEND
+  TRAMITES_PEND -->|"DEVUELVE a CAD"| CAD
+  TRAMITES_PEND -->|"Realizado: ENVÍA a Finiquito"| FINIQUITO["3. ROL-FINIQUITO<br/>(trámite Completado)"]
+
+  %% 3. ROL-FINIQUITO: acciones técnicas por default sin cambio de estado
+  FINIQUITO -->|"ENVÍA / DEVUELVE (default, sin cambio de estado)"| FINIQUITO
   FINIQUITO --> CIERRE(["4. Trámite cerrado"])
 ```
 
@@ -80,8 +93,8 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Sección | Campo actual | Label | Tipo de dato | Uso |
 |---|---|---|---|---|
 | FECHA DE SOLICITUD | `Fecha` | Fecha y Hora | Date | Fecha de ingreso o firma de la solicitud |
-| TIPO DE TRAMITE | `TIPOTRAMITE` | Tipo | List | Debe corresponder a Rehabilitación |
-| TIPO DE TRAMITE | `Poliza` | Póliza | Text | Número de la póliza que se rehabilitará |
+| TIPO DE TRAMITE | `TIPOTRAMITE` | Tipo | List | Debe corresponder al tipo de trámite solicitado |
+| TIPO DE TRAMITE | `Poliza` | Póliza | Text | Número de póliza relacionada con la solicitud |
 
 ### 7.2 Datos del tomador
 
@@ -133,7 +146,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 #### Entrada
 
-- Solicitud RT completa o documento de Rehabilitación RT.
+- Solicitud genérica completa.
 - Documentos adjuntos.
 - Datos capturados o extraídos automáticamente.
 
@@ -164,7 +177,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 #### Tareas
 
 1. Registrar la referencia.
-2. Gestionar la rehabilitación en los sistemas del INS.
+2. Gestionar la solicitud en los sistemas del INS.
 3. Registrar o confirmar el número de póliza.
 4. Enviar a ROL-FINIQUITO.
 
@@ -173,13 +186,13 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 | Resultado | Próximo rol |
 |---|---|
 | Gestión pendiente | ROL-TRAMITES |
-| Póliza rehabilitada | ROL-FINIQUITO |
+| Gestión completada | ROL-FINIQUITO |
 
 ### 8.3 ROL-FINIQUITO
 
 #### Entrada
 
-- Póliza rehabilitada.
+- Solicitud gestionada.
 - Número de póliza confirmado.
 
 #### Tareas
@@ -198,11 +211,10 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 
 | Código | Mensaje | Condición | Rol visible |
 |---|---|---|---|
-| DOC-RT-REQUERIDO | Debe adjuntar la solicitud RT completa o el documento de Rehabilitación RT. | Ninguna opción documental está completa | ROL-CAD |
-| POLIZA-RT-REQUERIDA | Debe indicar una póliza de riesgos de trabajo existente. | No se indicó el número de póliza | ROL-CAD |
 
 ## 10. Historial de cambios
 
 | Versión | Fecha | Autor | Cambio | En Producción |
 |---|---|---|---|---|
-| 1.0 | 2026-09-21 | Equipo funcional | Primera versión del documento | No |
+| 1.0 | 2026-09-21 | Equipo funcional | Primera versión del documento | Si |
+| 1.1 | 2026-09-22 | Equipo funcional | Corrección de duplicado en historial de cambios | Si |
