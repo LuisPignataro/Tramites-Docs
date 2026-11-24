@@ -16,7 +16,8 @@ documentos:
   - DOC-SOLICITUD-HOGARSEG-P4
   - DOC-COTIZACION-HOGAR
   - DOC-PERFECCIONAMIENTO
-  - DOC-DEBER-INFORMACION
+  - DOC-DEBER-INFORMACION-P1
+  - DOC-DEBER-INFORMACION-P2
 sistemas_relacionados:
   - Pricose
   - INS
@@ -155,7 +156,8 @@ flowchart TD
 | 3 | Solicitud de hogar seguro 2000 - parte 3 | DOC-SOLICITUD-HOGARSEG-P3 | Sí | ROL-CAD | Documento base del trámite |
 | 4 | Solicitud de hogar seguro 2000 - parte 4 | DOC-SOLICITUD-HOGARSEG-P4 | Sí | ROL-CAD | Documento base del trámite |
 | 5 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 6 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 6 | Deber de información - parte 1 | DOC-DEBER-INFORMACION-P1 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 7 | Deber de información - parte 2 | DOC-DEBER-INFORMACION-P2 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
 | 7 | Cotización | DOC-COTIZACION-HOGAR | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
 | 8 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
 

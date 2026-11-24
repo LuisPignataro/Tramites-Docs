@@ -30,6 +30,7 @@ En el futuro los Agentes podrán ingresar solicitudes directamente al sistema, e
 - [Emision Incendio comercial](tramites/emision-incendio-comercial.md)
 - [Emision RT](tramites/emision-RT.md)
 - [Emision Voluntario Automoviles](tramites/emision-voluntario-automoviles.md)
+- [Variación de Automóvil](tramites/variacion-voluntario-automoviles.md)
 
 ### Workflows
 

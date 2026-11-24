@@ -14,7 +14,8 @@ documentos:
   - DOC-SOLICITUD-RT-P3
   - DOC-REHABILITACION-RT
   - DOC-PERFECCIONAMIENTO
-  - DOC-DEBER-INFORMACION
+  - DOC-DEBER-INFORMACION-P1
+  - DOC-DEBER-INFORMACION-P2
 sistemas_relacionados:
   - Pricose
   - INS
@@ -91,8 +92,9 @@ La **Opción A** y la **Opción B** son alternativas. No se requieren ambas para
 | 3 | A | Solicitud de riesgos de trabajo - parte 3 | DOC-SOLICITUD-RT-P3 | Sí, para Opción A | ROL-CAD | Parte de la solicitud completa |
 | 4 | B | Rehabilitación RT | DOC-REHABILITACION-RT | Sí, para Opción B | ROL-CAD | Reemplaza las tres partes de la solicitud RT |
 | 5 | - | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 6 | - | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 7 | - | Registro nacional | DOC-REGISTRO-NACIONAL | No | ROL-CAD | Documento de consulta web |
+| 6 | - | Deber de información - parte 1 | DOC-DEBER-INFORMACION-P1 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 7 | - | Deber de información - parte 2 | DOC-DEBER-INFORMACION-P2 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 8 | - | Registro nacional | DOC-REGISTRO-NACIONAL | No | ROL-CAD | Documento de consulta web |
 
 ## 7. Datos del trámite
 

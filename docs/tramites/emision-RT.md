@@ -15,7 +15,8 @@ documentos:
   - DOC-SOLICITUD-RT-P2
   - DOC-SOLICITUD-RT-P3
   - DOC-PERFECCIONAMIENTO
-  - DOC-DEBER-INFORMACION
+  - DOC-DEBER-INFORMACION-P1
+  - DOC-DEBER-INFORMACION-P2
 sistemas_relacionados:
   - Pricose
   - INS
@@ -140,9 +141,10 @@ flowchart TD
 | 1 | Solicitud de riesgos de trabajo - parte 1 | DOC-SOLICITUD-RT-P1 | Sí | ROL-CAD | Documento base del trámite |
 | 2 | Solicitud de riesgos de trabajo - parte 2 | DOC-SOLICITUD-RT-P2 | Sí | ROL-CAD | Documento base del trámite |
 | 3 | Solicitud de riesgos de trabajo - parte 3 | DOC-SOLICITUD-RT-P3 | Sí | ROL-CAD | Documento base del trámite |
-| 7 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 8 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 9 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
+| 4 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 5 | Deber de información - parte 1 | DOC-DEBER-INFORMACION-P1 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 6 | Deber de información - parte 2 | DOC-DEBER-INFORMACION-P2 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 7 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
 
 ---
 ## 9. Datos del trámite

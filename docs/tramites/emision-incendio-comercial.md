@@ -18,7 +18,8 @@ documentos:
   - DOC-SOLICITUD-INC-COMER-P6
   - DOC-COTIZACION-INC-COMER ?
   - DOC-PERFECCIONAMIENTO
-  - DOC-DEBER-INFORMACION
+  - DOC-DEBER-INFORMACION-P1
+  - DOC-DEBER-INFORMACION-P2
 sistemas_relacionados:
   - Pricose
   - INS
@@ -159,9 +160,10 @@ flowchart TD
 | 5 | Solicitud de incendio comercial - parte 5 | DOC-SOLICITUD-INC-COMER-P5 | Sí | ROL-CAD | Documento base del trámite |
 | 6 | Solicitud de incendio comercial - parte 6 | DOC-SOLICITUD-INC-COMER-P6 | Sí | ROL-CAD | Documento base del trámite |
 | 7 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 8 | Deber de información | DOC-DEBER-INFORMACION | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
-| 9 | Cotización | DOC-COTIZACION-INC-COMER | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
-| 10 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
+| 8 | Deber de información - parte 1 | DOC-DEBER-INFORMACION-P1 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 9 | Deber de información - parte 2 | DOC-DEBER-INFORMACION-P2 | Condicional | ROL-CAD | Se utiliza para el cierre del trámite |
+| 10 | Cotización | DOC-COTIZACION-INC-COMER | Condicional | ROL-REVISION | Si no viene, puede cargarla revisión |
+| 11 | Registro nacional | DOC-REGISTRO-NACIONAL | Documento de registro nacional | No | Documento de consulta web |
 
 ---
 ## 8. Datos del trámite

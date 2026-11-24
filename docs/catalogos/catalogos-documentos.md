@@ -10,6 +10,8 @@ titulo: Catálogo de documentos
 | DOC-SOLICITUD-AUT-P2 | Solicitud Página 2 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-AUT-P3 | Solicitud Página 3 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-AUT-P4 | Solicitud Página 4 | Formulario principal de trámite | No | Documento base |
+| DOC-SOLICITUD-AUT-P5 | Solicitud Página 5 | Formulario principal de trámite | No | Documento base |
+| DOC-SOLICITUD-AUT-P6 | Solicitud Página 6 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-INC-COMER-P1 | Solicitud Página 1 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-INC-COMER-P2 | Solicitud Página 2 | Formulario principal de trámite | No | Documento base |
 | DOC-SOLICITUD-INC-COMER-P3 | Solicitud Página 3 | Formulario principal de trámite | No | Documento base |
@@ -36,7 +38,8 @@ titulo: Catálogo de documentos
 | DOC-COTIZACION | Cotización | Cotización de seguro | No | Puede ser adjuntada o generada por revisión |
 | DOC-FOTOS | Fotos | Fotos o comprobante de fotos | Sí | Condicional |
 | DOC-REVISION-TECNICA | Revisión técnica | Documento o constancia de revisión técnica | No | Condicional |
-| DOC-DEBER-INFORMACION | Deber de información | Documento informativo obligatorio | No | Requerido |
+| DOC-DEBER-INFORMACION-P1 | Deber de información Página 1 | Documento informativo obligatorio | No | Primera página requerida |
+| DOC-DEBER-INFORMACION-P2 | Deber de información Página 2 | Documento informativo obligatorio | No | Segunda página requerida |
 | DOC-COMPROBANTE-ENTREGA | Comprobante de entrega | Constancia de entrega documental | No | Requerido |
 | DOC-ADICIONALES | Documentos adicionales | Otros documentos enviados por agente | Sí | Opcional |
 | DOC-PERFECCIONAMIENTO | Comprobante de información previa | INFORMACIÓN PREVIA AL PERFECCIONAMIENTO | No | Condicional |

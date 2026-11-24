@@ -14,13 +14,16 @@ documentos:
   - DOC-SOLICITUD-AUT-P2
   - DOC-SOLICITUD-AUT-P3
   - DOC-SOLICITUD-AUT-P4
+  - DOC-SOLICITUD-AUT-P5
+  - DOC-SOLICITUD-AUT-P6
   - DOC-KYC
   - DOC-GUIA-INSPECCION
   - DOC-CARGO-AUTOMATICO-PDM
   - DOC-COTIZACION-AUT
   - DOC-FOTOS
   - DOC-REVISION-TECNICA
-  - DOC-DEBER-INFORMACION
+  - DOC-DEBER-INFORMACION-P1
+  - DOC-DEBER-INFORMACION-P2
   - DOC-PERFECCIONAMIENTO
   - DOC-COMPROBANTE-ENTREGA
 sistemas_relacionados:
@@ -126,15 +129,18 @@ flowchart TD
 | 2 | Solicitud de automóvil - parte 2 | DOC-SOLICITUD-AUT-P2 | Sí | ROL-CAD | Continuación de la solicitud |
 | 3 | Solicitud de automóvil - parte 3 | DOC-SOLICITUD-AUT-P3 | Sí | ROL-CAD | Continuación de la solicitud |
 | 4 | Solicitud de automóvil - parte 4 | DOC-SOLICITUD-AUT-P4 | Sí | ROL-CAD | Continuación de la solicitud |
-| 5 | KYC | DOC-KYC | Sí | ROL-CAD | Validar existencia |
-| 6 | Guía de inspección | DOC-GUIA-INSPECCION | Sí | ROL-CAD / ROL-REVISION | Debe coincidir con la placa |
-| 7 | Boleta de cargo automático o PDM | DOC-CARGO-AUTOMATICO-PDM | Condicional | ROL-CAD | Aplica según forma de pago |
-| 8 | Cotización | DOC-COTIZACION-AUT | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
-| 9 | Fotos | DOC-FOTOS | Condicional | ROL-CAD | Según solicitud o comprobante |
-| 10 | Revisión técnica | DOC-REVISION-TECNICA | Condicional | ROL-CAD | Puede venir física o indicada en guía |
-| 11 | Deber de información | DOC-DEBER-INFORMACION | Sí | ROL-CAD | Validar existencia |
-| 12 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-REVISION / ROL-DIGITACION | Se utiliza para el cierre del trámite |
-| 13 | Comprobante de entrega | DOC-COMPROBANTE-ENTREGA | Sí | ROL-CAD | Validar existencia |
+| 5 | Solicitud de automóvil - parte 5 | DOC-SOLICITUD-AUT-P5 | Sí | ROL-CAD | Continuación de la solicitud |
+| 6 | Solicitud de automóvil - parte 6 | DOC-SOLICITUD-AUT-P6 | Sí | ROL-CAD | Continuación de la solicitud |
+| 7 | KYC | DOC-KYC | Sí | ROL-CAD | Validar existencia |
+| 8 | Guía de inspección | DOC-GUIA-INSPECCION | Sí | ROL-CAD / ROL-REVISION | Debe coincidir con la placa |
+| 9 | Boleta de cargo automático o PDM | DOC-CARGO-AUTOMATICO-PDM | Condicional | ROL-CAD | Aplica según forma de pago |
+| 10 | Cotización | DOC-COTIZACION-AUT | Condicional | ROL-CAD / ROL-REVISION | Si no viene, puede cargarla revisión |
+| 11 | Fotos | DOC-FOTOS | Condicional | ROL-CAD | Según solicitud o comprobante |
+| 12 | Revisión técnica | DOC-REVISION-TECNICA | Condicional | ROL-CAD | Puede venir física o indicada en guía |
+| 13 | Deber de información - parte 1 | DOC-DEBER-INFORMACION-P1 | Sí | ROL-CAD | Validar existencia |
+| 14 | Deber de información - parte 2 | DOC-DEBER-INFORMACION-P2 | Sí | ROL-CAD | Validar existencia |
+| 15 | Perfeccionamiento | DOC-PERFECCIONAMIENTO | Condicional | ROL-REVISION / ROL-DIGITACION | Se utiliza para el cierre del trámite |
+| 16 | Comprobante de entrega | DOC-COMPROBANTE-ENTREGA | Sí | ROL-CAD | Validar existencia |
 
 ## 8. Datos del trámite
 
@@ -284,7 +290,7 @@ Los campos se documentan usando el **nombre actual del campo**, la **sección de
 |---|---|---|---|
 | VAL-DOC-001 | Debe existir solicitud | ROL-CAD | No permite avanzar |
 | VAL-DOC-002 | Debe existir guía de inspección | ROL-CAD | Solicitar documento faltante |
-| VAL-DOC-003 | Debe existir deber de información | ROL-CAD | Solicitar documento faltante |
+| VAL-DOC-003 | Deben existir las dos páginas del deber de información | ROL-CAD | Solicitar documento faltante |
 | VAL-DOC-004 | Debe existir comprobante de entrega | ROL-CAD | Solicitar documento faltante |
 | VAL-DOC-005 | Si la forma de pago es cargo automático o PDM, debe existir documento asociado | ROL-REVISOR | Solicitar documento faltante |
 | VAL-DOC-006 | Debe existir cotizacion | ROL-REVISOR ROL-TRAMITES | Cargar el documento - ROL-TRAMITES opcional |
